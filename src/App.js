@@ -1,11 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
-import Login from './components/Login';
+import Loginpage from './components/page/Loginpage';
+import React from 'react';
+import {Route,Switch} from 'react-router-dom'
+// import Home from './components/page/Home';
+import RegisterPage from './components/page/RegisterPage';
+
 
 function App() {
   return (
     <div>
-      <Login></Login>
+      <Switch>
+        <Route component={Loginpage} path='/' exact />
+        <Route component={RegisterPage} path='/Register' />
+      </Switch>
     </div>
   );
 }
