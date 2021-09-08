@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const styles = (theme) => ({
   loginTotal: {
@@ -28,9 +29,22 @@ const styles = (theme) => ({
 });
 
 const LoginForm2 = ({ classes }) => {
+  
   const handleLogin = (e) => {
     e.preventDefault();
-    alert("email: "+email+',password: '+password+',passwordconfirm: '+passwordConfirm);
+    if(password === passwordConfirm){
+      axios.post('http://localhost:5000/api/auth/signup',{
+        email:email,
+        password:password
+      }).then(
+        (data)=>{
+          alert(data.data)
+        }
+      )
+    }else{
+      alert('비밀번호와 비밀번호 확인이 일치하지않습니다')
+    }
+   
   };
 
   const [email, setEmail] = useState("");

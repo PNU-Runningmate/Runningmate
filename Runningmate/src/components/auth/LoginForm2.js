@@ -1,10 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState,useRef } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import KakaoLogin from "./KakaoLogin";
 import LoginImage from "../LoginImage";
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 const styles = (theme) => ({
   loginTotal: {
@@ -29,11 +31,35 @@ const styles = (theme) => ({
   },
 });
 
+
 const LoginForm2 = ({ classes }) => {
   const handleLogin = (e) => {
     e.preventDefault();
-    alert("email:" + email + "  password:" + password);
+    if( email === "" || password === ""){
+      alert('아이디와 비밀번호를 입력해주세요');
+    }else{
+    axios.post('http://localhost:5000/api/auth/login',{
+          email: email,
+          password: password,
+      }).then((data)=>{
+        console.log('sucess');
+          //redirect 시켜주기.?
+          //아니면 다른 응답코드 400 500 받앗을때 처리해주기
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+      console.log('누르긴함');
+    };
   };
+  const handleLogin2 = (e) => {
+    e.preventDefault();
+    axios.get("http://localhost:5000/api/auth/logout").then((data)=>{console.log(data)})
+    .catch((err)=>{
+      console.log(err)
+    })
+    };
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -124,10 +150,10 @@ const LoginForm2 = ({ classes }) => {
               >
                 회원가입
               </Button>
-            
+              <Button onClick={handleLogin2}>로그아웃</Button>
             </Link>
+            <Button><a href="http://localhost:5000/api/auth/kakao">카카오로그인</a></Button>
           </div>
-          <KakaoLogin />
         </form>
       </div>
     </div>
