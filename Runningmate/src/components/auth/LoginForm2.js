@@ -42,11 +42,14 @@ const LoginForm2 = ({ classes }) => {
           email: email,
           password: password,
       }).then((data)=>{
-        console.log('sucess');
+        if(data.status === 200){
+          alert('로그인 성공!')
+        }
           //redirect 시켜주기.?
           //아니면 다른 응답코드 400 500 받앗을때 처리해주기
       })
       .catch(err=>{
+        alert('잘못된 아이디 혹은 비밀번호임둥')
         console.log(err);
       })
       console.log('누르긴함');

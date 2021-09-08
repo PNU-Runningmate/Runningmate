@@ -31,7 +31,7 @@ authRouter.post('/login',isNotLoggedin,async (req,res,next)=>{
         }
         if(!user){
             console.log(info.message)
-            return next();
+            return res.status(403).json(info.message);
         }       
         return req.login(user,err=>{
             if(err){
