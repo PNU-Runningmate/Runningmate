@@ -9,7 +9,6 @@ const isLoggedin = (req,res,next)=>{
 };
 
 const isNotLoggedin = (req,res,next)=>{
-    console.log(req.headers);
     if(!req.isAuthenticated()){
         next();
     }else{
