@@ -1,0 +1,222 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* @font-face {
+    font-family: 'TmoneyRoundWindRegular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
+  
+* {
+      margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 0;
+    font-family: 'Pretendard-Regular';
+    font-size: 17px;
+}
+  
+#up-nav-var {
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 17px;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+  
+  /* .date {
+    margin-left: 30px;
+    margin-top : 30px;
+    font-size: smaller;
+    color: #7f70ff;
+    font-weight: bolder;
+  } */
+  
+#helloword {
+    font-size: 27px;
+    font-weight: bolder;
+    margin-left: 10px;
+    /* margin-top: 15px; */
+}
+  
+#date{
+    font-size: 15px;
+    color: #67BDEC;
+    margin-top: 2px;
+    font-weight: 650;
+}
+  
+#postbody {
+    /* border: 2px solid pink; */
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 50px;
+}
+
+#privious {
+    height: 9rem;
+    background-color: rgb(245, 245, 245);
+    -webkit-box-shadow: 5px 5px 11px 0px rgba(129, 129, 129, 0.418); 
+    box-shadow: 5px 5px 11px 0px rgba(129, 129, 129, 0.418);
+    text-align: center;
+    margin-top: 15px;
+    border-radius: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+  
+#record {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    padding-top: 25px;
+    font-weight: bold;
+    font-size: 19px;
+}
+  
+.select_box {
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    margin-top: 25px;
+}
+  
+.button {
+    width: 40px;
+    height: 25px;
+    border: 0;
+    outline: 0;
+}
+  
+#elements {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+  
+#elements_2 {
+    margin-left: 35px;
+}
+  
+#elements_3 {
+    margin-left: 35px;
+}
+  
+#num{
+    margin-top: 5px;
+}
+  
+#rank {
+    height: 19.3rem;
+    /* border: 2px solid purple; */
+    border-radius: 30px;
+    background: #67BDEC;
+    background: -moz-linear-gradient(-45deg, #67BDEC 0%, #8B7FFD 74%, #8B7FFD 100%);
+    background: -webkit-linear-gradient(-45deg, #67BDEC 0%, #8B7FFD 74%, #8B7FFD 100%);
+    background: linear-gradient(135deg, #67BDEC 0%, #67BDEC 100%, #67BDEC 100%);
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white;
+    -webkit-box-shadow: 5px 5px 11px 0px rgba(129, 129, 129, 0.418); 
+    box-shadow: 5px 5px 11px 0px rgba(129, 129, 129, 0.418);
+}
+  
+.ranking{
+    color: black;
+    font-weight: bold;
+    font-size: 19px;
+}
+  
+#rank_elements {
+    background-color: rgba(255, 255, 255, 0.808);
+    border-radius: 10px;
+    height: 38px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 6px;
+    margin-left: 7px;
+    margin-right: 7px;
+    font-size: small;
+    color: black;
+}
+  
+#number{
+    color: #ffe364;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 3px 2px 3px rgb(255, 255, 255);
+}
+  
+#number4{
+    color:rgb(161, 161, 161);
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 3px 2px 3px rgb(255, 255, 255);
+}
+  
+#rank_elements1 {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    color: black;
+}
+  
+#bottom-nav-var {
+    /* border: 2px solid blue; */
+    border-radius: 5px;
+    background-color: rgb(245,245,245);
+    color: rgb(49, 49, 49);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    margin-right: 0px;
+    margin-left: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+  
+#buttons{
+    font-size: smaller;
+}
+
+#bottom-nav-bar {
+    /* border: 2px solid blue; */
+    border-radius: 5px;
+    background-color: rgb(245,245,245);
+    color: rgb(49, 49, 49);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    margin-right: 0px;
+    margin-left: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+.image1{
+    border-radius: 20px;
+    height: 65px;
+    width: 65px;
+    margin-right: 10px;
+}
+  
+.home_img {
+    height: 23px;
+    width: 23px;
+  }
+
+#nav-button{
+    border: none;
+}
