@@ -1,0 +1,156 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard-Regular';
+}
+
+.nav{
+    background-color: #67BDEC;
+    color: white;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.km{
+    background-color: #f1d75f;
+    color: white;
+    border-radius: 30px;
+    width: 50px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.par-bar{
+    border: 1px solid white;
+    height: 145px;
+    border-radius: 20px;
+    margin-top: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* .par-box{
+    background-color: #f1d65f81;
+    border-radius: 20px;
+    height: 125px;
+} */
+
+.par{
+    display: flex;
+    justify-content:space-around;
+    margin-top: 10px;
+}
+
+.name{
+    display: flex;
+    justify-content: space-around;
+    font-size: small;
+
+}
+
+.current{
+    margin-left: 10px;
+    margin-top: 10px;
+    font-weight: bolder;
+}
+
+.ready{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.chatting{
+    border: 1px solid white;
+    background-color: rgb(245, 245, 245);
+    height: calc(100vh - 270px);
+    overflow-y: scroll;
+    border-radius: 20px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.content{
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.chat-bar{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#profile_img{
+    height: 65px;
+    width: 65px;
+    border-radius: 20px;
+    margin-top: 3px;
+}
+
+#r-button{
+    border-radius: 10px;
+    border: none;
+    height: 30px;
+    width: 63px;
+    margin-right: 5px;
+    background-color: #67BDEC;
+    color: white;
+}
+
+#s-button{
+    border-radius: 10px;
+    border: none;
+    height: 30px;
+    width: 63px;
+    margin-left: 5px;
+    background-color: #67BDEC;
+    color: white;
+}
+
+#chat-message{
+    border-radius: 5px;
+    border: 1px solid darkgrey;
+    height: 30px;
+    margin-right: 1px;
+}
+
+#chat-message2{
+    border-radius: 5px;
+    border: none;
+    height: 30px;
+    width: 50px;
+    margin-left: 1px;
+    background-color: #67BDEC;
+    color: white;
+}
+
+#edit_img{
+    background-color: #67BDEC;
+    width:25px;
+    height:25px;
+    display: flex;
+    align-items: center;
+    margin-left: 145px;
+}
+a{
+    text-decoration-line : none;
+    text-decoration : none;
+    color: white;
+}

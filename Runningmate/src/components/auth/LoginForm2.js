@@ -1,8 +1,8 @@
-import React, { Component, useState,useRef } from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import KakaoLogin from "./KakaoLogin";
 import LoginImage from "../LoginImage";
 import axios from 'axios';
@@ -33,6 +33,7 @@ const styles = (theme) => ({
 
 
 const LoginForm2 = ({ classes }) => {
+  const history=useHistory()
   const handleLogin = (e) => {
     e.preventDefault();
     if( email === "" || password === ""){
@@ -44,12 +45,15 @@ const LoginForm2 = ({ classes }) => {
       }).then((data)=>{
         if(data.status === 200){
           alert('로그인 성공!')
+          history.push('/waiting')
+          // History.push("/waiting")
         }
           //redirect 시켜주기.?
           //아니면 다른 응답코드 400 500 받앗을때 처리해주기
       })
       .catch(err=>{
         alert('잘못된 아이디 혹은 비밀번호임둥')
+        
         console.log(err);
       })
       console.log('누르긴함');
