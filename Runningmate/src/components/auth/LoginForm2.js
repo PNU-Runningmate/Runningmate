@@ -80,7 +80,7 @@ const LoginForm2 = ({ classes }) => {
     <div>
       <div className="root">
         <form noValidate autoComplete="off" className={classes.loginTotal}>
-          <LoginImage />
+          {/* <LoginImage /> */}
           <h1
             style={{
               textAlign: "center",
@@ -115,7 +115,7 @@ const LoginForm2 = ({ classes }) => {
                 float: "right",
                 fontSize: "0.8rem",
                 textTransform: "none",
-                paddingBottom: "20px",
+                // paddingBottom: "10px",
               }}
               color="inherit"
             >
@@ -124,13 +124,14 @@ const LoginForm2 = ({ classes }) => {
             <Button
               style={{
                 width: "100%",
-                fontSize: "1rem",
+                fontSize: "30sp",
                 textTransform: "none",
                 backgroundColor: "#67BDEC",
                 border: "none",
                 color: "white",
-                fontWeight: "700",
+                // fontWeight: "700",
                 borderRadius: "12px",
+                
               }}
               variant="outlined"
               color="inherit"
@@ -142,12 +143,12 @@ const LoginForm2 = ({ classes }) => {
               <Button
                 style={{
                   width: "100%",
-                  fontSize: "1rem",
+                  fontSize: "30sp",
                   textTransform: "none",
                   backgroundColor: "#DCDCDC",
                   border: "none",
                   color: "black",
-                  fontWeight: "700",
+                  // fontWeight: "700",
                   borderRadius: "12px",
                   marginTop: "10px",
                 }}
