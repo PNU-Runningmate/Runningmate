@@ -42,14 +42,11 @@ const LoginForm2 = ({ classes }) => {
           email: email,
           password: password,
       }).then((data)=>{
-        if(data.status === 200){
-          alert('로그인 성공!')
-        }
+        console.log('sucess');
           //redirect 시켜주기.?
           //아니면 다른 응답코드 400 500 받앗을때 처리해주기
       })
       .catch(err=>{
-        alert('잘못된 아이디 혹은 비밀번호임둥')
         console.log(err);
       })
       console.log('누르긴함');
@@ -155,7 +152,7 @@ const LoginForm2 = ({ classes }) => {
               </Button>
               <Button onClick={handleLogin2}>로그아웃</Button>
             </Link>
-            <Button><a href="http://localhost:5000/api/auth/kakao">카카오로그인</a></Button>
+            <Button><a style={{color:"black"}} href="http://localhost:5000/api/auth/kakao">카카오로그인</a></Button>
           </div>
         </form>
       </div>

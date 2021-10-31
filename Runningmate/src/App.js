@@ -6,6 +6,7 @@ import {Route,Switch} from 'react-router-dom'
 // import Home from './components/page/Home';
 import RegisterPage from './components/page/RegisterPage';
 import main from './components/main';
+import Waitingpage from './components/page/Waitingpage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route component={Loginpage} path='/' exact />
         <Route component={RegisterPage} path='/Register' />
         <Route component={main} path='/main'/>
+        <Route component={Waitingpage} path='/waiting' />
       </Switch>
     </div>
   );

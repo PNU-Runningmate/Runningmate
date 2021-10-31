@@ -3,6 +3,7 @@ const kakaoStrategy = require('passport-kakao').Strategy;
 const user = require('../Models/User');
 
 module.exports = ()=>{
+    console.log("restapi",process.env.REST_API)
     passport.use(new kakaoStrategy({
         clientID: process.env.REST_API,
         callbackURL: 'http://localhost:5000/oauth',
