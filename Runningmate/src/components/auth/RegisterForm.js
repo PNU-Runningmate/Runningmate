@@ -68,13 +68,13 @@ const LoginForm2 = ({ classes }) => {
           <h1
             style={{
               textAlign: "center",
-              "font-size": "25px",
+              fontSize: "25px",
               letterSpacing: "1.5px",
             }}
           >
             <Link
               to="/"
-              style={{ "text-decoration-line": "none", color: "black" }}
+              style={{ textDecorationLine: "none", color: "black" }}
             >
               WELCOME!
             </Link>
@@ -95,21 +95,21 @@ const LoginForm2 = ({ classes }) => {
             fullWidth
             onChange={onChangePasswordConfirm}
           />
-          {/* <Button style={{"width":"100%","font-size":"1rem", "text-transform":"none", "background-color":"#DCDCDC", "border":"none", "color":"black", "font-weight":"700", "border-radius":'20px','margin-top':'20px'}} variant="outlined" color="inherit" onClick={this.handleLogin}>회원가입</Button> */}
+          {/* <Button style={{"width":"100%",fontSize:"1rem", "text-transform":"none", "background-color":"#DCDCDC", "border":"none", "color":"black", "font-weight":"700", "border-radius":'20px','margin-top':'20px'}} variant="outlined" color="inherit" onClick={this.handleLogin}>회원가입</Button> */}
 
           <div style={{ marginTop: "10px", paddingLeft: "5px" }}>
-            {/* <Button style={{"float": "right","font-size":"0.8rem", "text-transform":"none", "paddingBottom":"20px"}} color="inherit">비밀번호를 잊으셨나요?</Button> */}
+            {/* <Button style={{"float": "right",fontSize:"0.8rem", "text-transform":"none", "paddingBottom":"20px"}} color="inherit">비밀번호를 잊으셨나요?</Button> */}
             <Button
               style={{
                 width: "100%",
-                "font-size": "1rem",
-                "text-transform": "none",
-                "background-color": "#DCDCDC",
+                fontSize: "1rem",
+                textTransform: "none",
+                backgroundColor: "#DCDCDC",
                 border: "none",
                 color: "black",
-                "font-weight": "700",
-                "border-radius": "20px",
-                "margin-top": "20px",
+                fontWeight: "700",
+                borderRadius: "20px",
+                marginTop: "20px",
               }}
               variant="outlined"
               color="inherit"

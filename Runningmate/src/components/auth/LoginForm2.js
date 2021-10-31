@@ -1,9 +1,9 @@
-import React, { Component, useState,useRef } from "react";
+import React, {  useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { Link, Redirect } from "react-router-dom";
-import KakaoLogin from "./KakaoLogin";
+import { Link, useHistory } from "react-router-dom";
+// import KakaoLogin from "./KakaoLogin";
 import LoginImage from "../LoginImage";
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -33,6 +33,7 @@ const styles = (theme) => ({
 
 
 const LoginForm2 = ({ classes }) => {
+  const history=useHistory()
   const handleLogin = (e) => {
     e.preventDefault();
     if( email === "" || password === ""){
@@ -42,7 +43,11 @@ const LoginForm2 = ({ classes }) => {
           email: email,
           password: password,
       }).then((data)=>{
-        console.log('sucess');
+        if(data.status === 200){
+          alert('로그인 성공!')
+          history.push('/main')
+          // History.push("/waiting")
+        }
           //redirect 시켜주기.?
           //아니면 다른 응답코드 400 500 받앗을때 처리해주기
       })
@@ -74,17 +79,17 @@ const LoginForm2 = ({ classes }) => {
     <div>
       <div className="root">
         <form noValidate autoComplete="off" className={classes.loginTotal}>
-          <LoginImage />
+          {/* <LoginImage /> */}
           <h1
             style={{
               textAlign: "center",
-              "font-size": "25px",
+              fontSize: "25px",
               letterSpacing: "1.5px",
             }}
           >
             <Link
               to="/"
-              style={{ "text-decoration-line": "none", color: "black" }}
+              style={{ textDecorationLine: "none", color: "black" }}
             >
               WELCOME!
             </Link>
@@ -107,9 +112,9 @@ const LoginForm2 = ({ classes }) => {
             <Button
               style={{
                 float: "right",
-                "font-size": "0.8rem",
-                "text-transform": "none",
-                paddingBottom: "20px",
+                fontSize: "0.8rem",
+                textTransform: "none",
+                // paddingBottom: "10px",
               }}
               color="inherit"
             >
@@ -118,13 +123,14 @@ const LoginForm2 = ({ classes }) => {
             <Button
               style={{
                 width: "100%",
-                "font-size": "1rem",
-                "text-transform": "none",
-                "background-color": "#67BDEC",
+                fontSize: "30sp",
+                textTransform: "none",
+                backgroundColor: "#67BDEC",
                 border: "none",
                 color: "white",
-                "font-weight": "700",
-                "border-radius": "20px",
+                // fontWeight: "700",
+                borderRadius: "12px",
+                
               }}
               variant="outlined"
               color="inherit"
@@ -132,27 +138,29 @@ const LoginForm2 = ({ classes }) => {
             >
               로그인
             </Button>
-            <Link to="/Register" style={{"text-decoration-line": "none"}}>
+            <Link to="/Register" style={{textDecorationLine: "none"}}>
               <Button
                 style={{
                   width: "100%",
-                  "font-size": "1rem",
-                  "text-transform": "none",
-                  "background-color": "#DCDCDC",
+                  fontSize: "30sp",
+                  textTransform: "none",
+                  backgroundColor: "#DCDCDC",
                   border: "none",
                   color: "black",
-                  "font-weight": "700",
-                  "border-radius": "20px",
-                  "margin-top": "10px",
+                  // fontWeight: "700",
+                  borderRadius: "12px",
+                  marginTop: "10px",
                 }}
                 variant="outlined"
                 color="inherit"
               >
                 회원가입
               </Button>
-              <Button onClick={handleLogin2}>로그아웃</Button>
+              
             </Link>
-            <Button><a style={{color:"black"}} href="http://localhost:5000/api/auth/kakao">카카오로그인</a></Button>
+            <a href="http://localhost:5000/api/auth/kakao" >
+              <img src='img/login2.png' alt='loginimg' style={{marginTop:'10px', width:'100%'}} /></a>
+            <Button onClick={handleLogin2}>로그아웃</Button>
           </div>
         </form>
       </div>

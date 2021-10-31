@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm2 from '../auth/LoginForm2';
-// import LoginImage from '../LoginImage';
+import LoginImage from '../LoginImage';
 // import KakaoLogin from '../auth/KakaoLogin';
 import io from "socket.io-client"
 
@@ -9,7 +9,7 @@ const Loginpage = () => {
   
   return (
     <div style={{'height' : '100vh'}} id='sum'>
-      {/* <LoginImage/> */}
+      <LoginImage/>
       <LoginForm2/>
       {/* <KakaoLogin/> */}
     </div>
