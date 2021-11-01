@@ -1,17 +1,26 @@
-import React, {Component} from 'react';
+import React, {Component,useEffect} from 'react';
 import '../styles/Main.css';
-
+import io from "socket.io-client"
 const Main = ({ history }) => {
+        const socket = io('http://localhost:5000',{withCredentials:true});
         const now= new Date();
         const todayMonth = now.getMonth() + 1;
         const todayDate = now.getDate()
         const week = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const day0fweek = week[now.getDay()];
+        useEffect(()=>{
+            const username = document.querySelector("#username");
+            socket.on("username",(data)=>{
+                username.innerText = `안녕하세요 ${data}님`;
+            })
+        })
+
 
             return(
                 <div>
                 <div id='up-nav-var'>
-                    <div id='helloword'>Hi, Jake!
+                    <div id='helloword'>
+                        <div id="username"></div>
                        <br></br>
                        <div id='date'>{todayMonth + '-' + todayDate + '-' + day0fweek}</div>
                     </div>

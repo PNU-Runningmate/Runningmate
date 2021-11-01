@@ -16,7 +16,6 @@ function App() {
       <Switch>
         <Route component={Loginpage} path='/' exact />
         <Route component={RegisterPage} path='/Register' />
-
         <Route component={Main} path='/Main'/>
         <Route component={Waitingpage} path='/waiting' />
         <Route component={Friendpage} path='/friend' />

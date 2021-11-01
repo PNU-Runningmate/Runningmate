@@ -15,7 +15,7 @@ authRouter.post('/signup',isNotLoggedin,async (req,res,next)=>{
         }else{
             const hasedpassword = await bcrpyt.hash(password,12);
             await User.create({ email,password:hasedpassword});
-            res.status(200).json('회원가입되었습니다')
+            res.redirect("http://localhost:3000")
         }
     }catch(err){
         console.log(err);

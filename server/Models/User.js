@@ -8,6 +8,12 @@ const UserSchema = new mongoose.Schema({
     },
     password:{
         type:String,
+    },
+    nickname:{
+        type:String,
+    },
+    kakaoId:{
+        type:String
     }
 },
 {timestamps:true});

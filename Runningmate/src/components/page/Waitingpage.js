@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../../styles/Waitingpage.css";
+import io from "socket.io-client";
 // import Hammer from '../../../public/img/hammer.jpg'
+const socket = io('http://localhost:5000',{withCredentials:true});
+let roonName = '123';
+const addMessage = (msg)=>{
+  const ul = document.querySelector("ul");
+  const li = document.createElement('li');
+  li.innerText = msg;
+  ul.appendChild(li);
+}
 
 const Waitingpage = () => {
-
   const [message, setMessage] = useState("");
   const onChangeMessage = (e) => setMessage(e.target.value);
   const onClick = () => {
-    alert('나: '+message);
+    socket.emit("new_message",message,roonName,()=>{
+      addMessage(message)
+    })
     setMessage("");
   };
   const onKeyPress = (e) => {
@@ -15,6 +25,9 @@ const Waitingpage = () => {
       onClick();
     }
   };
+  useEffect(()=>{
+    socket.on("new_message",addMessage);
+  },[]);
   return (
     <div>
       <div className="nav">
@@ -55,7 +68,7 @@ const Waitingpage = () => {
 
       <div className="chatting">
         <div className="content">
-
+          <ul></ul>
         </div>
       </div>
 

@@ -1,9 +1,6 @@
 const express = require('express');
 const app = express();
 const httpServer = require("http").createServer(app);
-const wsServer =require("socket.io")(httpServer,{cors:{origin:"*"}});
-
-
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
@@ -17,7 +14,6 @@ const passportConfig = require('./passport/index');
 const cors = require('cors');
 app.use(cors({origin:'http://localhost:3000',credentials:true}));
 dotenv.config();
-
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.urlencoded({extended:true}));
@@ -25,7 +21,7 @@ app.use(express.json());
 
 // app.use(cookieparser());
 
-app.use(session({
+const sessionMiddleware = session({
     name:'session_id',
     secret: process.env.COOKIE_SECRET,
     resave:false,
@@ -34,9 +30,9 @@ app.use(session({
         httpOnly:true,
         secure:false,
     }
-})
-);
+});
 
+app.use(sessionMiddleware);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -64,22 +60,43 @@ mongoose.connect(process.env.MONGO_URL,(err)=>{
     console.log('mongodb connected');
 })
 
+//socket.io import
+const options = {cors:{origin:"http://localhost:3000",methods: ["GET","POST"],credentials:true},pingTimeout: 30000};
+const io =require("socket.io")(httpServer,options);
+//compatibility with express middleware
+const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
 
+io.use(wrap(sessionMiddleware));
+io.use(wrap(passport.initialize()));
+io.use(wrap(passport.session()));
 
-wsServer.on("connection",(socket)=>{
+io.use((socket,next)=>{
+    if(socket.request.user){
+        next();
+    }else{
+        next(new Error('unathorized'));
+    }
+})
+
+io.on("connection",(socket)=>{
     console.log("소켓 접속 완료!");
-    socket['nickname']="Anon";
+    console.log(socket.id);
+    socket['nickname']=socket.request.user.nickname;
     socket.join('123');
+    console.log(socket.request.user);
+    socket.emit("username",socket.nickname);
 
     socket.onAny((event)=>{
         console.log(`Socket Event:${event}`);
     });
-
+    //chat
     socket.on("new_message",(message,roonName, done) => {
+        console.log(socket.nickname,message)
         socket.to(roonName).emit("new_message",`${socket.nickname} : ${message}`);
         done();
     });
 });
+
 
 //서버 on
 httpServer.listen(process.env.PORT || 5000,()=>{

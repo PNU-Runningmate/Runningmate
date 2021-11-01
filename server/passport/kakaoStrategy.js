@@ -3,7 +3,6 @@ const kakaoStrategy = require('passport-kakao').Strategy;
 const user = require('../Models/User');
 
 module.exports = ()=>{
-    console.log("restapi",process.env.REST_API)
     passport.use(new kakaoStrategy({
         clientID: process.env.REST_API,
         callbackURL: 'http://localhost:5000/oauth',
@@ -11,13 +10,14 @@ module.exports = ()=>{
         console.log('kakaoprofile',profile)
         try{
             const exuser = await user.findOne({
-                id:profile.id
+                kakaoId:profile.id.toString()
             });
             if(exuser){
                 done(null,exuser);
             }else{
                 const newuser = await user.create({
-                    id: profile.id
+                    kakaoId: profile.id.toString(),
+                    nickname: profile.username
                 });
                 done(null,newuser);
             }
