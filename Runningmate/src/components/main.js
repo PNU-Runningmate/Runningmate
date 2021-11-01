@@ -1,8 +1,10 @@
 import React, {Component,useEffect} from 'react';
 import '../styles/Main.css';
 import io from "socket.io-client"
+import axios from 'axios'
+axios.defaults.withCredentials = true;
+
 const Main = ({ history }) => {
-        const socket = io('http://localhost:5000',{withCredentials:true});
         const now= new Date();
         const todayMonth = now.getMonth() + 1;
         const todayDate = now.getDate()
@@ -10,9 +12,7 @@ const Main = ({ history }) => {
         const day0fweek = week[now.getDay()];
         useEffect(()=>{
             const username = document.querySelector("#username");
-            socket.on("username",(data)=>{
-                username.innerText = `안녕하세요 ${data}님`;
-            })
+            axios.get("http://localhost:5000/main").then(data=>username.innerText=`안녕하세요 ${data.data}님`);
         })
 
 

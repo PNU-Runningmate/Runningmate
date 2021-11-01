@@ -47,6 +47,9 @@ app.get('/oauth',passport.authenticate('kakao',{
     res.redirect("http://localhost:3000/main")
 })
 
+app.get('/main',(req,res)=>{
+    res.json(req.user.nickname);
+})
 //여기 고쳐보자!!!
 app.get('/waiting',(req,res)=>{
     console.log('hihihihi');
@@ -80,10 +83,8 @@ io.use((socket,next)=>{
 
 io.on("connection",(socket)=>{
     console.log("소켓 접속 완료!");
-    console.log(socket.id);
     socket['nickname']=socket.request.user.nickname;
     socket.join('123');
-    console.log(socket.request.user);
     socket.emit("username",socket.nickname);
 
     socket.onAny((event)=>{
