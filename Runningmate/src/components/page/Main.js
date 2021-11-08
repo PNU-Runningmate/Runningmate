@@ -1,11 +1,10 @@
-import React, {Component,useEffect} from 'react';
-import '../styles/Main.css';
+import React, {useEffect} from 'react';
+import '../../styles/Main.css';
 import io from "socket.io-client"
 import axios from 'axios'
 axios.defaults.withCredentials = true;
 
 const Main = ({ history }) => {
-        
         const now= new Date();
         const todayMonth = now.getMonth() + 1;
         const todayDate = now.getDate()
@@ -15,6 +14,7 @@ const Main = ({ history }) => {
             const username = document.querySelector("#username");
             axios.get("http://localhost:5000/main").then(data=>username.innerText=`안녕하세요 ${data.data}님`);
         })
+
 
             return(
                 <div>
@@ -59,7 +59,7 @@ const Main = ({ history }) => {
                             <option>5km</option>
                             <option>10km</option>
                         </select>
-                        <label class='ranking'>&nbsp;구간 순위</label>
+                        <label className='ranking'>&nbsp;구간 순위</label>
 
                         <div id='rank_elements1'>
                             <div>순위</div>
@@ -96,7 +96,7 @@ const Main = ({ history }) => {
 
                 <div id='bottom-nav-bar'>
                     <button id='nav-button' onClick={()=> {history.push('/main')}}><img src="img/home.png" alt='mypic' className='home_img'></img></button>
-                    <button id='nav-button' onClick={()=> {history.push('/waiting')}}><img src="img/message.png" alt='mypic' className='home_img'></img></button>
+                    <button id='nav-button' onClick={()=> {history.push('/rooms')}}><img src="img/message.png" alt='mypic' className='home_img'></img></button>
                     <button id='nav-button' onClick={()=> {history.push('/friend')}}><img src="img/contact.png" alt='mypic' className='home_img'></img></button>
                     <button id='nav-button' onClick={()=> {history.push('/info')}}><img src="img/info.png" alt='mypic' className='home_img'></img></button>
                 </div>

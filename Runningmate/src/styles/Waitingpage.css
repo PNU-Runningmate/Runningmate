@@ -17,7 +17,16 @@
     height: 40px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    text-align: center;
+    display: flex;
+}
+
+.back_button{
+    background-color: #67BDEC;
+    border: none;
+    margin-right: 5px;
+    
 }
 
 .km{
@@ -103,14 +112,30 @@
     border-radius: 20px;
     margin-top: 3px;
 }
+#ready_profile_img{
+    height: 65px;
+    width: 65px;
+    border-radius: 20px;
+    margin-top: 3px;
+    border: solid 2px #67BDEC;
+}
 
-#r-button{
+#yesready{
     border-radius: 10px;
     border: none;
     height: 30px;
     width: 63px;
     margin-right: 5px;
     background-color: #67BDEC;
+    color: white;
+}
+#noready{
+    border-radius: 10px;
+    border: none;
+    height: 30px;
+    width: 63px;
+    margin-right: 5px;
+    background-color: #f80000;
     color: white;
 }
 
