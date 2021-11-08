@@ -1,21 +1,19 @@
 import React, { useState,useEffect } from "react";
+import {Link} from 'react-router-dom';
 import "../../styles/Waitingpage.css";
-import io from "socket.io-client";
-// import Hammer from '../../../public/img/hammer.jpg'
-const socket = io('http://localhost:5000',{withCredentials:true});
-let roonName = '123';
+import { socket } from '../modules/SocketContext';
+
 const addMessage = (msg)=>{
   const ul = document.querySelector("ul");
   const li = document.createElement('li');
   li.innerText = msg;
   ul.appendChild(li);
 }
-
-const Waitingpage = () => {
+const Waitingpage = (props) => {
   const [message, setMessage] = useState("");
   const onChangeMessage = (e) => setMessage(e.target.value);
   const onClick = () => {
-    socket.emit("new_message",message,roonName,()=>{
+    socket.emit("new_message",message,()=>{
       addMessage(message)
     })
     setMessage("");
@@ -25,6 +23,13 @@ const Waitingpage = () => {
       onClick();
     }
   };
+  const enter = ()=>{
+    socket.emit('CreateRoom')
+    socket.on('CreateRoom',(data)=>{
+      props.history.push(`room?id=${data}`);
+    })
+    socket.on('Error',(data,roomname)=>{console.log(data); props.history.push(`room?id=${roomname}`)});
+  }
   useEffect(()=>{
     socket.on("new_message",addMessage);
   },[]);
@@ -53,8 +58,8 @@ const Waitingpage = () => {
             <div>이ㅇㅇ님</div>
             <div>박ㅇㅇ님</div>
             <div>최ㅇㅇ님</div>
+            <button onClick={enter}>방으로입장</button>
           </div>
-
           <div className="ready">
             <button type="button" id="r-button">
               준비

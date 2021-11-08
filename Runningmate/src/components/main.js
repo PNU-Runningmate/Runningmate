@@ -5,6 +5,7 @@ import axios from 'axios'
 axios.defaults.withCredentials = true;
 
 const Main = ({ history }) => {
+        
         const now= new Date();
         const todayMonth = now.getMonth() + 1;
         const todayDate = now.getDate()
@@ -14,7 +15,6 @@ const Main = ({ history }) => {
             const username = document.querySelector("#username");
             axios.get("http://localhost:5000/main").then(data=>username.innerText=`안녕하세요 ${data.data}님`);
         })
-
 
             return(
                 <div>
