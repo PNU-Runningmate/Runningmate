@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
 // import KakaoLogin from "./KakaoLogin";
-import LoginImage from "../LoginImage";
+// import LoginImage from "../LoginImage"; 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
