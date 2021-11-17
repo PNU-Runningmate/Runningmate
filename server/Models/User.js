@@ -7,7 +7,8 @@ const UserSchema = new mongoose.Schema({
     },
     kakaoId:{
         type:String
-    }
+    },
+    
 },
 {timestamps:true});
 

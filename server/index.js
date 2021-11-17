@@ -102,10 +102,11 @@ io.on("connection",(socket)=>{
     });
     const {roomId} = socket.handshake.query;
     socket.join(roomId);
+    console.log(socket.request.user.kakaoId);
     socket['nickname']=socket.request.user.nickname;
     socket['status'] = false;
     socket['distance'] = 0;
-
+    let location = [];
     //유저 목록 재갱신
     socket.on('newUser',async ()=>{
         try{
@@ -138,12 +139,16 @@ io.on("connection",(socket)=>{
         const message = {...data,nickname:socket.nickname};
         io.in(roomId).emit("newChatMessage",message);
     });
-
+    //모든 유저 geolocation 실행
+    socket.on("Loading",()=>{
+        io.in(roomId).emit('Start')
+    })
     //좌표 기록 및 계산
     socket.on('Start',async (data)=>{
+        location.push(data)
+        console.log('location',location)
         if(socket.Before == undefined){
             socket['Before'] = {'longitude': data.longitude ,'latitude':data.latitude};
-            console.log('최초기록')
         }else{
             socket.distance += await computeDistance(socket.Before,data);
             socket.Before = data;
@@ -159,8 +164,6 @@ io.on("connection",(socket)=>{
                 console.log(e)
             }
         }
-        console.log(socket.Before)
-        console.log(socket.distance)
     })
     //소켓 연결 해제 listen
     socket.on('disconnect',()=>{

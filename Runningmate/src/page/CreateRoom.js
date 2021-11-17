@@ -1,5 +1,6 @@
 import React,{useEffect,useState,useRef} from 'react'
 import {useHistory} from 'react-router-dom';
+import {Button,Card} from 'react-bootstrap'
 import axios from 'axios';
 
 function CreateRoom(props) {
@@ -14,11 +15,13 @@ function CreateRoom(props) {
       }
   
       return (
-          <div>
-              <h1>방만들기 페이지</h1>
-              <input ref={title} placeholder="방제목을 입력하세요"/>
-              <input ref={length} placeholder="달릴 거리를 입력하세요" />
-              <button type='button' onClick={onClickRoomNumber} id='roombutton'>버튼</button>
+          <div style={{display:'flex',justifyContent:"center"}}>
+            <Card bg="Light" style={{width:'18rem'}}>
+              <Card.Header>방 생성하기</Card.Header>
+              <input ref={title} placeholder="방제목을 입력하세요"/><br/>
+              <input ref={length} type="number" min="1" max="20" placeholder="달릴 거리를 입력하세요" />
+              <Button type='button' onClick={onClickRoomNumber} id='roombutton' variant="info">생성하기</Button>
+            </Card>
           </div>
       )
   }

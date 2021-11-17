@@ -1,11 +1,13 @@
 import io from 'socket.io-client'
 import React,{useRef,useState,useEffect} from 'react'
+var id;
 
 function SocketContext(roomId) {
     const socketRef = useRef();
     const [messages,setMessage] = useState([]);
     const [users,setUsers] = useState([]);
     const [allReady,setallReady] = useState(false);
+    const [start,setStart] = useState(false);
     const CheckForStart = (users)=>{
         let count = 0
         for(let i of users){
@@ -40,10 +42,17 @@ function SocketContext(roomId) {
         socketRef.current.on('newUser',(data)=>{
             setUsers(data);
         })
+        
+        socketRef.current.on('Start',()=>{
+            setStart(true);
+            id = navigator.geolocation.watchPosition(success,error);
+            console.log(id);
+        })
 
         socketRef.current.on('Running',(data)=>{
             setUsers(data);
         })
+
         socketRef.current.on('userLeave',()=>{
             socketRef.current.emit('newUser')
             })
@@ -60,6 +69,7 @@ function SocketContext(roomId) {
     const sendReady = (data)=>{
         socketRef.current.emit('Ready')
     }
+    
     const sendMessage = (message)=>{
         socketRef.current.emit('newChatMessage',{
             body:message,
@@ -73,16 +83,21 @@ function SocketContext(roomId) {
         socketRef.current.emit('Start',data)
     }
     function error(){
-        console.log('태일아 조떄성~~~~')
+        console.log('Geolocation Error:Can not get a geo information')
     }
+
     const sendStart = ()=>{
         // navigator.geolocation.getCurrentPosition(success,error)
-        navigator.geolocation.watchPosition(success,error);
-        console.log('로딩중중중')
+        socketRef.current.emit('Loading')
+    }
+
+    const Stop = ()=>{
+        console.log('stop',id);
+        navigator.geolocation.clearWatch(id);
     }
 
 
-    return {socketRef,allReady,users,messages,sendMessage,sendReady,sendStart};
+    return {Stop,start,socketRef,allReady,users,messages,sendMessage,sendReady,sendStart};
 }
 
 export default SocketContext
