@@ -12,6 +12,10 @@ const session = require('express-session');
 const AuthRouter = require('./Routers/auth');
 const passportConfig = require('./passport/index');
 const cors = require('cors');
+const {isLoggedin} = require('./middlewares/login');
+const {computeDistance} = require('./modules/distance');
+
+
 app.use(cors({origin:'http://localhost:3000',credentials:true}));
 dotenv.config();
 app.use(morgan('dev'));
@@ -19,7 +23,6 @@ app.use(helmet());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-// app.use(cookieparser());
 
 const sessionMiddleware = session({
     name:'session_id',
@@ -38,6 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 passportConfig(passport);
 
+
 //router
 app.use('/api/auth',AuthRouter);
 
@@ -47,11 +51,21 @@ app.get('/oauth',passport.authenticate('kakao',{
     res.redirect("http://localhost:3000/main")
 })
 
+
 app.get('/main',(req,res)=>{
     res.json(req.user.nickname);
 })
-app.get('/room',(req,res)=>{
-    res.json(req.query.id);
+
+app.get('/room',isLoggedin,(req,res)=>{
+    res.json({status_code:200})
+});
+
+app.get('/test',(req,res)=>{
+    const {length,title} = req.query;
+    const randomnumber = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    res.json({
+        "redirect_url":`?room_id=${randomnumber}&title=${title}&length=${length}`,
+    })
 })
 
 //db연결
@@ -80,63 +94,83 @@ io.use((socket,next)=>{
     }
 })
 
+//소켓
 io.on("connection",(socket)=>{
     console.log("소켓 접속 완료!");
     socket.onAny((event)=>{
         console.log(`Socket Event:${event}`);
     });
+    const {roomId} = socket.handshake.query;
+    socket.join(roomId);
     socket['nickname']=socket.request.user.nickname;
-    socket['Status'] = false;
+    socket['status'] = false;
+    socket['distance'] = 0;
 
-    socket.on('CreateRoom',()=>{
-        if(socket.rooms.size == 1){
-            socket.emit('CreateRoom',`room_${socket.id}`);
-        }
-        else{
-            socket.emit('Error','이미 방에 참여중입니다.',`room_${socket.id}`)
-        }
-    })
-    socket.on('EnterRoom',(roomName)=>{
-        if(socket.rooms.size == 1){
-            socket.join(roomName);
-        }
-        console.log(io.sockets.adapter.rooms);
-        const a = io.sockets.adapter.rooms.get(roomName);
-        console.log(a);
-        for(let i in a){
-            console.log('hfdsahfdah')
-            console.log(i);
-        }
-        socket.emit("EnterUser",socket.nickname);
-    })
-    //Ready
-    socket.on('ready',(roomName)=>{
-        socket['Status'] = true;
-        io.to(roomName).emit('ready',socket.Status)
-    })
-    //if all ready
-    socket.on('start',(roomName)=>{
-        for(const socket in io.sockets.clients(`${roomName}`)){
-            console.log(socket);
+    //유저 목록 재갱신
+    socket.on('newUser',async ()=>{
+        try{
+        const data = await io.in(roomId).fetchSockets();
+        let UserList = [];
+        data.forEach(i=>{
+            UserList.push({"nickname":i.nickname,"status":i.status});
+            })
+        io.in(roomId).emit("newUser",UserList);
+        }catch(err){
+            console.log(err)
         }
     })
-    
-    
-    //chat
-    socket.on("new_message",(message,roonName, done) => {
-        console.log(socket.nickname,message)
-        socket.to(roonName).emit("new_message",`${socket.nickname} : ${message}`);
-        done();
+    //준비 상태 및 유저목록 재갱신
+    socket.on('Ready',async ()=>{
+        socket.status = !socket.status
+        try{
+            const data = await io.in(roomId).fetchSockets();
+            let UserList = [];
+            data.forEach(i=>{
+                UserList.push({"nickname":i.nickname,"status":i.status});
+                })
+                io.in(roomId).emit("Ready",UserList);
+        }catch(e){
+            console.log(e)
+        }
+    })
+    //채팅메세지 listen
+    socket.on("newChatMessage",(data)=>{
+        const message = {...data,nickname:socket.nickname};
+        io.in(roomId).emit("newChatMessage",message);
     });
+
+    //좌표 기록 및 계산
+    socket.on('Start',async (data)=>{
+        if(socket.Before == undefined){
+            socket['Before'] = {'longitude': data.longitude ,'latitude':data.latitude};
+            console.log('최초기록')
+        }else{
+            socket.distance += await computeDistance(socket.Before,data);
+            socket.Before = data;
+            //방에 참여된 유저들 거리정보 뿌려주기
+            try{
+                const data = await io.in(roomId).fetchSockets();
+                let UserList = [];
+                data.forEach(i=>{
+                    UserList.push({"nickname":i.nickname,"status":i.status,"distance":i.distance});
+                    })
+                    io.in(roomId).emit("Running",UserList);
+            }catch(e){
+                console.log(e)
+            }
+        }
+        console.log(socket.Before)
+        console.log(socket.distance)
+    })
+    //소켓 연결 해제 listen
     socket.on('disconnect',()=>{
         console.log('disconnect');
         console.log(io.sockets.adapter.rooms);
+        io.in(roomId).emit("userLeave")
     })
-});
-
+})
 
 //서버 on
 httpServer.listen(process.env.PORT || 5000,()=>{
     console.log(`the server listen on ${process.env.PORT || 5000}`);
 })
-

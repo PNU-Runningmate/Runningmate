@@ -2,6 +2,7 @@ const isLoggedin = (req,res,next)=>{
     if (req.isAuthenticated()){
         next();
     }else{
+        console.log('로그인필요')
         res.status(403).json({message:'로그인 필요'});
     }
 };
