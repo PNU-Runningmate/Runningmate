@@ -179,3 +179,27 @@ a{
     text-decoration : none;
     color: white;
 }
+
+.message-item{
+    display: inline-block;
+    max-width: 55%;
+    margin:8px;
+    padding: 12px 8px;
+    word-break:break-word;
+    border-radius: 4px;
+    color: white;
+}
+.message-box-my-message{
+    text-align: right;
+}
+.message-box-received-message{
+    text-align: left;
+}
+.my-message{
+    background-color: rgb(202, 202, 196);
+    margin-right:2%;
+}
+.received-message{
+    margin-left: 2%;
+    background-color: #67BDEC;;
+}

@@ -1,26 +1,30 @@
-import React, {useEffect} from 'react';
-import '../../styles/Main.css';
-import io from "socket.io-client"
+import React, {useEffect,useRef, useState} from 'react';
+import '../styles/Main.css';
 import axios from 'axios'
+import {useHistory}  from 'react-router';
 axios.defaults.withCredentials = true;
-
-const Main = ({ history }) => {
+const RoomState = ()=>{
+    const path = localStorage.getItem("RoomUrl");
+    return path? `room${path}` : 'create_room';
+}
+const Main = (props) => {
+        const RoomPath = RoomState();
+        const history = useHistory();
+        const [nickname,setnickname] = useState('로그인이 필요합니다');
         const now= new Date();
         const todayMonth = now.getMonth() + 1;
         const todayDate = now.getDate()
         const week = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const day0fweek = week[now.getDay()];
         useEffect(()=>{
-            const username = document.querySelector("#username");
-            axios.get("http://localhost:5000/main").then(data=>username.innerText=`안녕하세요 ${data.data}님`);
-        })
-
+            axios.get("http://localhost:5000/main").then(data=>setnickname(`안녕하세요 ${data.data}님`));
+        },[])
 
             return(
                 <div>
                 <div id='up-nav-var'>
                     <div id='helloword'>
-                        <div id="username"></div>
+                        <div id="username">{nickname}</div>
                        <br></br>
                        <div id='date'>{todayMonth + '-' + todayDate + '-' + day0fweek}</div>
                     </div>
@@ -96,7 +100,7 @@ const Main = ({ history }) => {
 
                 <div id='bottom-nav-bar'>
                     <button id='nav-button' onClick={()=> {history.push('/main')}}><img src="img/home.png" alt='mypic' className='home_img'></img></button>
-                    <button id='nav-button' onClick={()=> {history.push('/rooms')}}><img src="img/message.png" alt='mypic' className='home_img'></img></button>
+                    <button id='nav-button' onClick={()=> {history.push(`/${RoomPath}`)}}><img src="img/message.png" alt='mypic' className='home_img'></img></button>
                     <button id='nav-button' onClick={()=> {history.push('/friend')}}><img src="img/contact.png" alt='mypic' className='home_img'></img></button>
                     <button id='nav-button' onClick={()=> {history.push('/info')}}><img src="img/info.png" alt='mypic' className='home_img'></img></button>
                 </div>
