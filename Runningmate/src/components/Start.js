@@ -8,7 +8,7 @@ function Start(props) {
     return (
         <div>
             {users[0].distance == undefined 
-            ? <Spinner animation="border" variant="info" />
+            ? <Spinner animation="border" variant="info" size="L"/>
             :users.map((user,i)=>(
                 <div key={i}>
                     <div>{user.nickname}</div>

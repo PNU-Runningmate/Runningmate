@@ -2,7 +2,7 @@ import io from 'socket.io-client'
 import React,{useRef,useState,useEffect} from 'react'
 var id;
 
-function SocketContext(roomId) {
+function SocketContext(roomId,length) {
     const socketRef = useRef();
     const [messages,setMessage] = useState([]);
     const [users,setUsers] = useState([]);
@@ -53,6 +53,10 @@ function SocketContext(roomId) {
             setUsers(data);
         })
 
+        socketRef.current.on('arrive',()=>{
+            Stop();
+        })
+
         socketRef.current.on('userLeave',()=>{
             socketRef.current.emit('newUser')
             })
@@ -69,7 +73,7 @@ function SocketContext(roomId) {
     const sendReady = (data)=>{
         socketRef.current.emit('Ready')
     }
-    
+
     const sendMessage = (message)=>{
         socketRef.current.emit('newChatMessage',{
             body:message,
@@ -88,12 +92,13 @@ function SocketContext(roomId) {
 
     const sendStart = ()=>{
         // navigator.geolocation.getCurrentPosition(success,error)
-        socketRef.current.emit('Loading')
+        socketRef.current.emit('Loading',length)
     }
 
     const Stop = ()=>{
         console.log('stop',id);
         navigator.geolocation.clearWatch(id);
+        socketRef.current.emit('arrive');
     }
 
 

@@ -14,6 +14,8 @@ const passportConfig = require('./passport/index');
 const cors = require('cors');
 const {isLoggedin} = require('./middlewares/login');
 const {computeDistance} = require('./modules/distance');
+const Record = require('./Models/Record');
+
 
 
 app.use(cors({origin:'http://localhost:3000',credentials:true}));
@@ -68,6 +70,23 @@ app.get('/test',(req,res)=>{
     })
 })
 
+app.get("/date",async (req,res)=>{
+    const {rday} = req.query;
+    const start = new Date(rday);
+    const setend = new Date(rday);
+    const end = new Date(setend.setDate(start.getDate()+1));
+
+    try{
+        const record = await Record.find({
+            author: req.user,
+            createdAt: {$gte: start,$lt: end}
+        })
+        res.json(record)
+    }catch(e){
+        console.log(e)
+    }
+})
+
 //db연결
 mongoose.connect(process.env.MONGO_URL,(err)=>{
     if(err){
@@ -94,6 +113,7 @@ io.use((socket,next)=>{
     }
 })
 
+
 //소켓
 io.on("connection",(socket)=>{
     console.log("소켓 접속 완료!");
@@ -102,7 +122,6 @@ io.on("connection",(socket)=>{
     });
     const {roomId} = socket.handshake.query;
     socket.join(roomId);
-    console.log(socket.request.user.kakaoId);
     socket['nickname']=socket.request.user.nickname;
     socket['status'] = false;
     socket['distance'] = 0;
@@ -140,30 +159,57 @@ io.on("connection",(socket)=>{
         io.in(roomId).emit("newChatMessage",message);
     });
     //모든 유저 geolocation 실행
-    socket.on("Loading",()=>{
+    socket.on("Loading",(length)=>{
+        socket['Goal'] = length;
         io.in(roomId).emit('Start')
     })
     //좌표 기록 및 계산
     socket.on('Start',async (data)=>{
         location.push(data)
-        console.log('location',location)
+        console.log(`${socket.id}`,'location',location)
+        socket['starttime'] = new Date(Date.now())
         if(socket.Before == undefined){
             socket['Before'] = {'longitude': data.longitude ,'latitude':data.latitude};
+            try{
+            const data = await io.in(roomId).fetchSockets();
+            let UserList = [];
+            data.forEach(i=>{
+                UserList.push({"nickname":i.nickname,"status":i.status,"distance":0});
+                })
+                io.in(roomId).emit("Running",UserList);
+            }catch(e){
+                console.log(e)
+            }
         }else{
             socket.distance += await computeDistance(socket.Before,data);
             socket.Before = data;
             //방에 참여된 유저들 거리정보 뿌려주기
-            try{
-                const data = await io.in(roomId).fetchSockets();
-                let UserList = [];
-                data.forEach(i=>{
-                    UserList.push({"nickname":i.nickname,"status":i.status,"distance":i.distance});
-                    })
-                    io.in(roomId).emit("Running",UserList);
-            }catch(e){
-                console.log(e)
+            if(socket.Goal <= socket.distance){
+                socket.emit('arrive');
+            }else{
+                try{
+                    const data = await io.in(roomId).fetchSockets();
+                    let UserList = [];
+                    data.forEach(i=>{
+                        UserList.push({"nickname":i.nickname,"status":i.status,"distance":i.distance});
+                        })
+                        io.in(roomId).emit("Running",UserList);
+                }catch(e){
+                    console.log(e)
+                }
             }
         }
+    })
+    socket.on('arrive',async ()=>{
+        socket['endtime']= new Date(Date.now())
+        const time = (socket.endtime.getTime()-socket.starttime.getTime())/1000/60/60
+        await Record.create({
+                author: socket.request.user.id,
+                location: location,
+                runningtime: time.toFixed(2),
+                length: socket.distance,
+                pace: time/socket.distance
+            })
     })
     //소켓 연결 해제 listen
     socket.on('disconnect',()=>{
@@ -177,3 +223,4 @@ io.on("connection",(socket)=>{
 httpServer.listen(process.env.PORT || 5000,()=>{
     console.log(`the server listen on ${process.env.PORT || 5000}`);
 })
+

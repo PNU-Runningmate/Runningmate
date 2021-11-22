@@ -8,7 +8,9 @@ const UserSchema = new mongoose.Schema({
     kakaoId:{
         type:String
     },
-    
+    records:[
+            {type:mongoose.Schema.Types.ObjectId,ref:'Record'}
+        ],
 },
 {timestamps:true});
 

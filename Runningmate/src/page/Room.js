@@ -20,7 +20,7 @@ function Room() {
     const RoomName = new URLSearchParams(window.location.search).get('title');
     const Length = new URLSearchParams(window.location.search).get('length');
     const roomId = new URLSearchParams(window.location.search).get('room_id');
-    const { users,start,allReady,messages, sendMessage, sendReady, sendStart, Stop} = SocketContext(roomId);
+    const { users,start,allReady,messages, sendMessage, sendReady, sendStart, Stop} = SocketContext(roomId,Length);
 
     console.log('users',users)
 

@@ -10,6 +10,7 @@ import Friendpage from './page/Friendpage';
 import Infopage from './page/Infopage';
 import CreateRoom from './page/CreateRoom';
 import Room from './page/Room';
+import Map from './components/Map'
 function App() {
   
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route component={Room} path='/room'/>
         <Route component={Friendpage} path='/friend' />
         <Route component={Infopage} path='/info' />
+        <Route component={Map} path='/map'/>
       </Switch>
     </div>
   );
