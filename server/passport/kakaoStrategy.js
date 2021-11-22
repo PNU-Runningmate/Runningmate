@@ -10,13 +10,14 @@ module.exports = ()=>{
         console.log('kakaoprofile',profile)
         try{
             const exuser = await user.findOne({
-                id:profile.id
+                kakaoId:profile.id.toString()
             });
             if(exuser){
                 done(null,exuser);
             }else{
                 const newuser = await user.create({
-                    id: profile.id
+                    kakaoId: profile.id.toString(),
+                    nickname: profile.username
                 });
                 done(null,newuser);
             }

@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
 // import KakaoLogin from "./KakaoLogin";
-import LoginImage from "../LoginImage";
+// import LoginImage from "../LoginImage"; 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
@@ -52,7 +52,6 @@ const LoginForm2 = ({ classes }) => {
           //아니면 다른 응답코드 400 500 받앗을때 처리해주기
       })
       .catch(err=>{
-        alert('잘못된 아이디 혹은 비밀번호임둥')
         console.log(err);
       })
       console.log('누르긴함');

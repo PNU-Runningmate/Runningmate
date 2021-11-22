@@ -2,13 +2,15 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
-    email:{
+    nickname:{
         type:String,
-        unique:true,
     },
-    password:{
-        type:String,
-    }
+    kakaoId:{
+        type:String
+    },
+    records:[
+            {type:mongoose.Schema.Types.ObjectId,ref:'Record'}
+        ],
 },
 {timestamps:true});
 

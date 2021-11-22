@@ -1,9 +1,8 @@
 const isLoggedin = (req,res,next)=>{
-    console.log(req.headers);
-    console.log(req.isAuthenticated())
     if (req.isAuthenticated()){
         next();
     }else{
+        console.log('로그인필요')
         res.status(403).json({message:'로그인 필요'});
     }
 };
@@ -12,7 +11,7 @@ const isNotLoggedin = (req,res,next)=>{
     if(!req.isAuthenticated()){
         next();
     }else{
-        res.status(403).send('이미 로그인된 사용자입니다.')
+        res.redirect("http://localhost:3000/main");
         console.log('로그인된유저임')
     }
 };
