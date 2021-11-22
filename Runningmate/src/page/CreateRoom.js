@@ -21,7 +21,12 @@ function CreateRoom(props) {
     ]
   
       return (
-          <div style={{display:'flex',justifyContent:"center"}}>
+          <div style={{position:'absolute', left:"50%", transform:"translate(-50%)"}}>
+
+            <div>
+            <button onClick={ ()=> {history.goBack()}}>뒤로가기</button>
+            </div>
+
             <Card bg="Light" style={{width:'18rem'}}>
               <Card.Header>방 생성하기</Card.Header>
               <input ref={title} placeholder="방제목을 입력하세요"/><br/>
