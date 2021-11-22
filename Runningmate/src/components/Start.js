@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Spinner from 'react-bootstrap/esm/Spinner'
 
 function Start(props) {
+    const [visible, setVisible] = useState(true)
+    const stop2 = () => {
+        setVisible(false);
+    }
+
     const {Stop,users,Length } = props
     console.log(users[0].distance)
     return (
@@ -17,7 +22,8 @@ function Start(props) {
                 </div>)
             )
             }
-            <button onClick={Stop}>종료</button>
+            {visible? <button onClick={Stop, stop2}>종료</button> : null}
+            
         </div>
     )
 }
