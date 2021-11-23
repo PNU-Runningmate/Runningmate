@@ -16,18 +16,28 @@ function Start(props) {
     }, [])
 
     return (
-        <div>
+        <div id='main'>
             {loading
-            ? <Spinner animation="border" variant="info"/>
+            ? <Spinner id='spinner' animation="border" variant="info"/>
             :users.map((user,i)=>(
                 <div key={i}>
-                    <div>{user.nickname}</div>
-                    <div>{(users[i].distance/Length)*100}%</div>
-                    <ProgressBar animated now={(users[i].distance/Length)*100} label={`${(users[i].distance/Length)*100}`}/>
+                    <div id='info3'>
+                    <div id='nickname'>{user.nickname} - </div>
+                    <div id='percent'>&nbsp;{Math.round((users[i].distance/Length)*100)}%</div>
+                    </div>
+
+                    <div id='bar'>
+                    <ProgressBar id='progress' animated now={(users[i].distance/Length)*100} label={`${(users[i].distance/Length)*100}`}/>
+                    </div>
+                    <br></br>
+                    <hr></hr>
                 </div>)
             )
             }
-            {visible? <button onClick={Stop, stop2}>종료</button> : null}
+
+            <div id='fin'>
+                {visible? <button id='finish_btn' onClick={Stop, stop2}>종료</button> : null}
+            </div>
             
         </div>
     )
