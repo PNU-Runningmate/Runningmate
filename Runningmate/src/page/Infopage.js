@@ -3,17 +3,7 @@ import Map from '../components/Map';
 import Logbox from '../components/Logbox';
 import axios from 'axios';
 import { timeout } from '../../node_modules/workbox-core/_private';
-<<<<<<< HEAD
-import '../styles/Infopage.css'
-import {AiOutlineSearch} from "react-icons/ai";
-
-const RoomState = ()=>{
-    const path = localStorage.getItem("RoomUrl");
-    return path? `room${path}` : 'create_room';
-}
-=======
 import { serverURL } from '../components/modules/ServerConst';
->>>>>>> 4be3d8e4995b3c72a5daf0bc8b8d3abc1827e14c
 
 const Infopage = ({ history }) => {
     const RoomPath=RoomState()
