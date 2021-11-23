@@ -226,15 +226,19 @@ a{
     background-color: #67BDEC;
     margin-left: 10px;
     border: none;
-    width: 55px;
-    border-radius: 10px;
+    width: 60px;
+    border-radius: 5px;
+    color: white;
 }
 
 #cancel_btn {
-    margin-right: 10px;
+    /* margin-right: 10px; */
     border: none;
-    width: 55px;
-    border-radius: 10px;
+    width: 60px;
+    border-radius: 5px;
+    /* margin: 0 auto; */
+    color: white;
+    background-color: lightgray;
 }
 
 .myname{
@@ -245,4 +249,5 @@ a{
 .myname2 {
     margin: 0 auto;
     text-align: center;
+    color: #67BDEC;
 }

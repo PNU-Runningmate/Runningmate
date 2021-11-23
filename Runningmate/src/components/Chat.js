@@ -27,7 +27,7 @@ function Chat(props) {
         setready(!ready)
         sendReady()
         if(!ready){
-            DomReady.current.style.backgroundColor = 'rgb(245, 245, 245)';
+            DomReady.current.style.backgroundColor = 'lightgray';
         }else{
             DomReady.current.style.backgroundColor = '#67BDEC';
         }
@@ -57,6 +57,7 @@ function Chat(props) {
                     <button id='start_btn' onClick={sendStart} >시작</button>
                     ):(<div/>)}
                     </div>
+                    
                 </div>
             </div>
 

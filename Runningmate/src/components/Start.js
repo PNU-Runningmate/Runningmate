@@ -1,6 +1,7 @@
 import React from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Spinner from 'react-bootstrap/esm/Spinner'
+import '../styles/Start.css';
 
 function Start(props) {
     const {Stop,users,Length } = props
