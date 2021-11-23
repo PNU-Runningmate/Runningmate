@@ -5,12 +5,13 @@ import '../styles/Start.css';
 
 function Start(props) {
     const [visible, setVisible] = useState(true)
+    const {Stop,users,Length } = props
+    const length = Number(Length.slice(0,Length.length-2))
+    const [loading,setloading] = useState(true);
     const stop2 = () => {
+        Stop()
         setVisible(false);
     }
-
-    const {Stop,users,Length } = props
-    const [loading,setloading] = useState(true);
     useEffect(() => {
         setTimeout(()=>{setloading(false)},2000);
     }, [])
@@ -22,12 +23,12 @@ function Start(props) {
             :users.map((user,i)=>(
                 <div key={i}>
                     <div>{user.nickname}</div>
-                    <div>{(users[i].distance/Length)*100}%</div>
-                    <ProgressBar animated now={(users[i].distance/Length)*100} label={`${(users[i].distance/Length)*100}`}/>
+                    <div>{Math.round((users[i].distance/length)*100)}%</div>
+                    <ProgressBar animated now={(users[i].distance/length)*100} label={`${(users[i].distance/length)*100}`}/>
                 </div>)
             )
             }
-            {visible? <button onClick={Stop, stop2}>종료</button> : null}
+            {visible? <button onClick={stop2}>종료</button> : null}
             
         </div>
     )
