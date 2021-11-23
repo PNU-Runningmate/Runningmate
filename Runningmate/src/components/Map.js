@@ -1,9 +1,8 @@
-import React,{useEffect,useState,useRef} from 'react'
+import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 import '../styles/Map.css';
 import { MdArrowBackIos } from "react-icons/md";
 import {useHistory} from 'react-router-dom';
-import Logbox from '../components/Logbox';
 
 const RoomState = ()=>{
     const path = localStorage.getItem("RoomUrl");
@@ -52,7 +51,7 @@ function Map(props) {
     //     map.setCenter(moveLatLon);
     // }
     return (
-        <div>
+        <div className='mapbackground'>
             <div id='title2'>
                 <button id='back-btn' onClick={ ()=> {history.goBack()}}><MdArrowBackIos/></button>
                 <div id='title-name'>{setdate[0]}</div>
@@ -75,7 +74,7 @@ function Map(props) {
             </div>
 
             <div>
-                <div id="map" style={{width:"415px",height:"425px"}}></div>
+                <div id="map" style={{width:"100vw",height:"68vh"}}></div>
             </div>
 
             <div id='bottom-nav-bar'>
