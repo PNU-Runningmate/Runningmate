@@ -33,7 +33,6 @@ function SocketContext(roomId,length) {
             setUsers(data);
         })
         socketRef.current.on('newChatMessage',(message)=>{
-            console.log(message);
             const incomingMessage = {
                 ...message,
                 ownedByCurrentUser : message.senderId === socketRef.current.id,
@@ -48,7 +47,6 @@ function SocketContext(roomId,length) {
         socketRef.current.on('Start',()=>{
             setStart(true);
             id = navigator.geolocation.watchPosition(success,error);
-            console.log(id);
         })
 
         socketRef.current.on('Running',(data)=>{

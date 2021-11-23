@@ -8,7 +8,7 @@ function RankItem(props) {
             <div id='rank_elements'>
                 <div id='number'>{rank+1}</div>
                 <div>{nickname}</div>
-                <div>{hour[0]}h {hour[1]}m</div>
+                <div>{hour[0]}h</div>
             </div>
     )
 }

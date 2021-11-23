@@ -33,10 +33,9 @@ function Chat(props) {
         }
     }
     const showstart = ()=>{
-        console.log('잉?')
-        console.log('안나오는데???')
         if(allReady){
             console.log(socketRef.current.id)
+            console.log(users[0].socket_id)
             if(users[0].socket_id == socketRef.current.id){
                 return true
             }
