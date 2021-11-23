@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Spinner from 'react-bootstrap/esm/Spinner'
+import '../styles/Start.css';
 
 function Start(props) {
     const [visible, setVisible] = useState(true)

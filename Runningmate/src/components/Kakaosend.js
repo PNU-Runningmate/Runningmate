@@ -1,5 +1,6 @@
 import React from 'react'
 import { clientURL } from './modules/ServerConst'
+import '../styles/Waitingpage.css';
 
 function Kakaosend(props) {
     const sendLink = ()=> {
