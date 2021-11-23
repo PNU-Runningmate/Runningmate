@@ -21,9 +21,9 @@ function LatestRecord() {
         <div>
                 <div id='privious'>
                     <div id='record'>
-                        <button type='button' className='button'>◀</button>
+                        {/* <button type='button' className='button'>◀</button> */}
                         <div>&nbsp;&nbsp;나의 최근 기록&nbsp;&nbsp;</div>
-                        <button type='button' className='button'>▶</button>
+                        {/* <button type='button' className='button'>▶</button> */}
                     </div>
                     <div id='elements'>
                         <div id='elements_1'>

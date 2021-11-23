@@ -9,7 +9,9 @@ function Start(props) {
         setVisible(false);
     }
 
-    const {Stop,users,Length } = props
+    const {Stop,users,Length} = props
+    const length = Number(Length.slice(0,Length.length-2));
+    console.log(length)
     const [loading,setloading] = useState(true);
     useEffect(() => {
         setTimeout(()=>{setloading(false)},2000);
@@ -23,11 +25,11 @@ function Start(props) {
                 <div key={i}>
                     <div id='info3'>
                         <div id='nickname'>{user.nickname} - </div>
-                        <div id='percent'>&nbsp;{Math.round((users[i].distance/Length)*100)}%</div>
+                        <div id='percent'>&nbsp;{Math.round((users[i].distance/length)*100)} %</div>
                     </div>
 
                     <div id='bar'>
-                    <ProgressBar id='progress' animated now={(users[i].distance/Length)*100} label={`${(users[i].distance/Length)*100}`}/>
+                    <ProgressBar id='progress' animated now={(users[i].distance/length)*100} label={`${(users[i].distance/length)*100}`}/>
                     </div>
                     <br></br>
                     <hr></hr>

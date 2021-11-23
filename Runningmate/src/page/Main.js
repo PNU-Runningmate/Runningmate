@@ -47,7 +47,7 @@ const Main = (props) => {
 
                     <div>
                     {/* <img src="img/profile.JPG" alt='mypic' className="image1"></img> */}
-                    <Button onClick={handleLogin2} id='logout_btn2'>LOGOUT</Button>
+                    <Button onClick={handleLogin2} id='logout_btn2'>Logout</Button>
                     </div>
 
                 </div>
