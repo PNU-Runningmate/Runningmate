@@ -21,7 +21,11 @@ function Logbox(props) {
         <Link to={{
             pathname:`/map`,
             state:{
-                location:location
+                location:location,
+                runningtime:runningtime,
+                date:date,
+                length:length,
+                pace:pace,
             }
             }}
             style={{textDecoration:'none' , color:'black'}}>

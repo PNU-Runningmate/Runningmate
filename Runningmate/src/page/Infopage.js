@@ -3,6 +3,7 @@ import Map from '../components/Map';
 import Logbox from '../components/Logbox';
 import axios from 'axios';
 import { timeout } from '../../node_modules/workbox-core/_private';
+<<<<<<< HEAD
 import '../styles/Infopage.css'
 import {AiOutlineSearch} from "react-icons/ai";
 
@@ -10,15 +11,20 @@ const RoomState = ()=>{
     const path = localStorage.getItem("RoomUrl");
     return path? `room${path}` : 'create_room';
 }
+=======
+import { serverURL } from '../components/modules/ServerConst';
+>>>>>>> 4be3d8e4995b3c72a5daf0bc8b8d3abc1827e14c
 
 const Infopage = ({ history }) => {
     const RoomPath=RoomState()
    const dateControl = useRef();
    const [list,setlist] = useState([]);
    const click = ()=>{
-       axios.get(`http://localhost:5000/date?rday=${dateControl.current.value}`).then((value)=>setlist(value.data));
+       axios.get(`${serverURL}/date?rday=${dateControl.current.value}`).then((value)=>setlist(value.data)).catch((e)=>{
+           alert(e.response.data.message)
+           history.push('/')
+        });
    }
-   console.log(list[0])
     return(
         <div className='background'>
             <div className='previous'>
@@ -43,6 +49,6 @@ const Infopage = ({ history }) => {
             </div>
         </div>
     )
-}
+    }
 
 export default Infopage;

@@ -15,6 +15,9 @@ const RecordSchema = new mongoose.Schema({
         type:String
     },
     runningtime:{
+        type:Number
+    },
+    roomlength:{
         type:String
     }
 },{timestamps:true});

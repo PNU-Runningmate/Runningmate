@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard-Regular';
+}
+
+#title2 {
+    margin-bottom: 40px;
+    height: 40px;
+    background-color: #67BDEC;
+    align-items: center;
+}
+
+#title-name{
+    color: white;
+    margin: 0 auto;
+}
+
+#back-btn {
+    margin-left: 10px;
+}
+
+#info{
+    margin: 0 auto;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-around;
+    color: gray;
+}
+
+#info2{
+    margin: 0 auto;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
+    font-weight: bolder;
+}
+
+#len2{
+    font-size: 30px;
+}
+
+#time2 {
+    font-size: 30px;
+}
+
+#pace2 {
+    font-size: 30px;
+} 
+
+#map{
+    margin: 0 auto;
+}
+
+/* #date2{
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    background-color: #f1d75f;
+    width: 300px;
+    border-radius: 10px;
+    color: white;
+    height: 30px;
+} */

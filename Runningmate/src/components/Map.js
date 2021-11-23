@@ -1,16 +1,29 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useRef} from 'react'
 import axios from 'axios'
+import '../styles/Map.css';
+import { MdArrowBackIos } from "react-icons/md";
+import {useHistory} from 'react-router-dom';
+import Logbox from '../components/Logbox';
 
+const RoomState = ()=>{
+    const path = localStorage.getItem("RoomUrl");
+    return path? `room${path}` : 'create_room';
+}
 
 function Map(props) {
+    const RoomPath = RoomState();
+    const history = useHistory();
+    // const dateControl = useRef();
+    const [list,setlist] = useState([]);
     const {kakao} = window;
-    const {location} = props.location.state
+    const {location,pace,length,runningtime,date} = props.location.state
+    const setdate = date.toString().split("T")
     const create = ()=>{
         let container = document.getElementById("map");
     
         let options = {
-          center: new kakao.maps.LatLng(35.229197, 129.089272),
-          level: 8,
+          center: new kakao.maps.LatLng(location[0].latitude, location[0].longitude),
+          level: 2,
         };
     
         let map = new kakao.maps.Map(container, options);
@@ -28,9 +41,10 @@ function Map(props) {
         polyline.setMap(map)
     }
     useEffect(() => {
-        create()
-
+        create();
+        
     }, [])
+
     // function setCenter(){
     //     var moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
     
@@ -39,7 +53,37 @@ function Map(props) {
     // }
     return (
         <div>
-            <div id="map" style={{width:"500px",height:"400px"}}></div>
+            <div id='title2'>
+                <button id='back-btn' onClick={ ()=> {history.goBack()}}><MdArrowBackIos/></button>
+                <div id='title-name'>{setdate[0]}</div>
+                <div>&nbsp;&nbsp;&nbsp;</div>
+            </div>
+
+            {/* <div id='date2'>{date}</div> */}
+
+
+            <div id='info'>
+            <div id='len'>킬로미터</div>
+            <div id='time'>시간</div>
+            <div id='pace'>평균 페이스</div>
+            </div>
+
+            <div id='info2'>
+            <div id='len2'>&nbsp;&nbsp;&nbsp;{length}</div>
+            <div id='time2'>&nbsp;&nbsp;&nbsp;{runningtime}</div>
+            <div id='pace2'>{pace}</div>
+            </div>
+
+            <div>
+                <div id="map" style={{width:"415px",height:"425px"}}></div>
+            </div>
+
+            <div id='bottom-nav-bar'>
+                    <button id='nav-button' onClick={()=> {history.push('/main')}}><img src="img/home.png" alt='mypic' className='home_img'></img></button>
+                    <button id='nav-button' onClick={()=> {history.push(`/${RoomPath}`)}}><img src="img/message.png" alt='mypic' className='home_img'></img></button>
+                    {/* <button id='nav-button' onClick={()=> {history.push('/friend')}}><img src="img/contact.png" alt='mypic' className='home_img'></img></button> */}
+                    <button id='nav-button' onClick={()=> {history.push('/info')}}><img src="img/info.png" alt='mypic' className='home_img'></img></button>
+            </div>
         </div>
     )
 }
