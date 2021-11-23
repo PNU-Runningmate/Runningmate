@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Pretendard-Light';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+*{
+    font-family:'Pretendard-Light';
+    margin: 0;
+    padding: 0;
+}
+.day{
+    padding-top: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.searchbutton{
+    background-color: white;
+    width: 8vw;
+}
+.boxcover{
+    padding-top: 8vh;
+}
+.box{
+    /* padding-top: 10vh; */
+    /* border: 1px solid black; */
+    box-shadow: inset;
+    height: 20vh;
+    width: 90vw;
+    border-radius: 10px;
+    margin-left: 5vw;
+    background-color: rgb(245,245,245)
+}
+.history_name{
+    display: flex;
+    justify-content: space-around;
+    /* color: rgba(211, 211, 211, 0.253) */
+    /* font-size: 8px; */
+}
+.history_names{
+    font-size: 12px;
+    color: rgba(31, 20, 20, 1)
+}
+.history_element{
+    display: flex;
+    justify-content: space-around; 
+}
+.background{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.808);
+}
