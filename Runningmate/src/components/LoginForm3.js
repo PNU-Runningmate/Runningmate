@@ -5,7 +5,6 @@ import axios from 'axios';
 import '../styles/Login.css';
 axios.defaults.withCredentials = true;
 
-
 const LoginForm3 = () => {
     const handleLogin2 = (e) => {
         e.preventDefault();
@@ -23,7 +22,7 @@ const LoginForm3 = () => {
             <div style={{ marginTop: "10px" }}>
               <a href="http://localhost:5000/api/auth/kakao" >
                 <img src='img/login2.png' alt='loginimg' style={{marginTop:'50px', paddingLeft: '40px', paddingRight: '40px',width:'100%'}} /></a>
-              <Button onClick={handleLogin2} id='logout_btn'>로그아웃</Button>
+              {/* <Button onClick={handleLogin2} id='logout_btn'>로그아웃</Button> */}
             </div>
         
       </div>
