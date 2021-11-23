@@ -26,10 +26,10 @@ function CreateRoom(props) {
         })
     }
     const myoption=[
-      {key:1,name:"1"},
-      {key:3,name:"3"},
-      {key:5,name:"5"},
-      {key:10,name:"10"},
+      {key:1,name:"1km"},
+      {key:3,name:"3km"},
+      {key:5,name:"5km"},
+      {key:10,name:"10km"},
     ]
   
       return (

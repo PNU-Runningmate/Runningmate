@@ -77,7 +77,7 @@ app.get('/rank',async(req,res)=>{
     const {ranklength} = req.query;
     try{
         const record = await Record.find({roomlength:ranklength,length:{$gte:ranklength.slice(0,ranklength.length-2)}}).sort({runningtime:1})
-        console.log(record)
+        res.json(record.slice(0,5))
     }catch(e){
         console.log(e)
     }
@@ -172,7 +172,7 @@ io.on("connection",(socket)=>{
             const data = await io.in(roomId).fetchSockets();
             let UserList = [];
             data.forEach(i=>{
-                UserList.push({"nickname":i.nickname,"status":i.status});
+                UserList.push({"nickname":i.nickname,"status":i.status,"socket_id":i.id});
                 })
                 io.in(roomId).emit("Ready",UserList);
         }catch(e){
@@ -231,6 +231,7 @@ io.on("connection",(socket)=>{
         const time = (socket.endtime.getTime()-socket.starttime.getTime())/1000/60/60
         await Record.create({
                 author: socket.request.user.id,
+                nickname : socket.request.user.nickname,
                 location: location,
                 runningtime: time.toFixed(2),
                 length: socket.distance.toFixed(4),
