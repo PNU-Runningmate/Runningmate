@@ -83,11 +83,13 @@
 .chatting{
     border: 1px solid white;
     background-color: rgb(245, 245, 245);
-    height: calc(100vh - 270px);
+    height: calc(100vh - 240px);
     overflow-y: scroll;
     border-radius: 20px;
     margin-top: 25px;
     margin-bottom: 5px;
+    justify-content: center;
+    margin: 0 auto;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -126,7 +128,7 @@
     height: 30px;
     width: 63px;
     margin-right: 5px;
-    background-color: #67BDEC;
+    background-color: yellow;
     color: white;
 }
 #noready{
@@ -135,7 +137,7 @@
     height: 30px;
     width: 63px;
     margin-right: 5px;
-    background-color: #f80000;
+    background-color: red;
     color: white;
 }
 
@@ -180,6 +182,10 @@ a{
     color: white;
 }
 
+.edit {
+    width: 150px;
+}
+
 .message-item{
     display: inline-block;
     max-width: 55%;
@@ -201,5 +207,42 @@ a{
 }
 .received-message{
     margin-left: 2%;
-    background-color: #67BDEC;;
+    background-color: #67BDEC;
+}
+
+#back {
+    border: none;
+    background-color: #67BDEC;
+    color: white;
+}
+
+#kakao-link-btn {
+    border: none;
+    background-color: #67BDEC;
+    color: white;
+}
+
+#start_btn {
+    background-color: #67BDEC;
+    margin-left: 10px;
+    border: none;
+    width: 55px;
+    border-radius: 10px;
+}
+
+#cancel_btn {
+    margin-right: 10px;
+    border: none;
+    width: 55px;
+    border-radius: 10px;
+}
+
+.myname{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.myname2 {
+    margin: 0 auto;
+    text-align: center;
 }

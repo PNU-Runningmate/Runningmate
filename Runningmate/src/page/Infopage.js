@@ -10,6 +10,7 @@ const Infopage = ({ history }) => {
    const click = ()=>{
        axios.get(`http://localhost:5000/date?rday=${dateControl.current.value}`).then((value)=>setlist(value.data));
    }
+
    console.log(list[0])
     return(
         <div>
@@ -18,11 +19,13 @@ const Infopage = ({ history }) => {
             <br></br>
             검색:
                 <input ref={dateControl} type="date"/><button type="submit" onClick={click}>제출</button>
+
             {list.map((item,i)=>(
                 <Logbox key={i} date={item.createdAt} length={item.length} runningtime={item.runningtime} pace={item.pace} location={item.location} />
             ))}
+
         </div>
     )
-}
+    }
 
 export default Infopage;

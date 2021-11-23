@@ -1,0 +1,31 @@
+#login_page {
+    background-color: #67BDEC;
+}
+
+#sum {
+    background-color: #67BDEC;
+}
+
+#welcome{
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 80px;
+}
+
+#runningmate{
+    color: white;
+    text-align: center;
+    /* padding-top: 5px; */
+    font-size: 40px;
+    padding-bottom: 40px;
+}
+
+#image {
+    padding-top: 0px;
+}
+
+#logout_btn {
+    margin: 0 auto;
+    color: white;
+}

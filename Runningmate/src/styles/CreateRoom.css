@@ -1,0 +1,131 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+*{  
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard-Regular';
+}
+
+#title {
+    background-color: #67BDEC;
+    color: white;
+    height: 40px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    display: flex;
+    padding-left: 15px;
+}
+
+#title2 {
+    display: flex;
+}
+
+#roomtitle {
+    border-radius: 5px;
+    height: 35px;
+    width: 290px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+#km{
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    width: 290px;
+    display: flex;
+    margin: 0 auto;
+}
+
+#box {
+    height: 600px;
+    /* margin-top: 20px; */
+    /* margin-left: 10px;
+    margin-right: 10px; */
+    padding-top: 80px;
+    background-color: rgb(247,247,247);
+    /* border-radius: 10px; */
+    text-align: center;
+}
+
+#backbtn {
+    padding-left: none;
+}
+
+#roombutton {
+    margin-top: 20px;
+    border: none;
+    background-color: #67BDEC;
+    width: 100px;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+}
+
+#createbutton{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#room_btn{
+    color: white;
+    border: none;
+    width: 110px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: #67BDEC;
+    margin-top: 20px;
+}
+
+#room_title {
+    font-size: 23px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-weight: bolder;
+}
+
+#distance{
+    font-size: 23px;
+    padding-bottom: 10px;
+    font-weight: bolder;
+}
+
+/* #background{
+    background-color: rgb(221, 221, 221);
+    border-radius: 10px;
+    padding-top: 35px;
+    padding-bottom: 30px;
+    margin-left: 25px;
+    margin-right: 25px;
+    -webkit-box-shadow: 5px 5px 11px 0px rgba(129, 129, 129, 0.418); 
+    box-shadow: 5px 5px 11px 0px rgba(129, 129, 129, 0.418);
+} */
+
+#card{
+    justify-content: center;
+    margin: 0 auto;
+    background-color: rgb(235, 235, 235);
+    border-radius: 15px;
+}
+
+#back-btn {
+    border: none;
+    background-color: #67BDEC;
+    color: white;
+}
+
+#select {
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

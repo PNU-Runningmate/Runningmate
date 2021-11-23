@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import '../styles/Waitingpage.css';
 
 function Kakaosend(props) {
     const sendLink = ()=> {

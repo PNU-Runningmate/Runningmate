@@ -27,15 +27,15 @@ function Chat(props) {
         setready(!ready)
         sendReady()
         if(!ready){
-            DomReady.current.style.backgroundColor = 'red';
+            DomReady.current.style.backgroundColor = 'rgb(245, 245, 245)';
         }else{
-            DomReady.current.style.backgroundColor = 'blue';
+            DomReady.current.style.backgroundColor = '#67BDEC';
         }
     }
     return (
         <div>
             <div className="par-bar">
-                <div className="current">현재참여인원:{usercount}명</div>
+                <div className="current">현재참여인원: {usercount}명</div>
                 <div className="par-box">
                     <div className="par">
                         {/* <img id="profile_img" src="img/profile.jpg" alt="profile" /> */}
@@ -45,13 +45,16 @@ function Chat(props) {
                     </div>
                     <div className="name">
                     {users.map((username,i)=>(
-                        <div key={i} className='myname'>{username.nickname},{username.status? 'Ready':'not ready'}</div>
+                        <div id='ready_state'>
+                        <div key={i} className='myname'>{username.nickname}</div>
+                        <div key={i} className='myname2'>{username.status? 'Ready':''}</div>
+                        </div>
                     ))}
                     </div>
                     <div className="ready">
-                    <button type="button" ref={DomReady} onClick={onClick}>{ready ? '취소':'준비'}</button>
+                    <button id= 'cancel_btn' type="button" ref={DomReady} onClick={onClick}>{ready ? '취소':'준비'}</button>
                     {allReady ? (
-                    <button onClick={sendStart} >시작</button>
+                    <button id='start_btn' onClick={sendStart} >시작</button>
                     ):(<div/>)}
                     </div>
                 </div>
