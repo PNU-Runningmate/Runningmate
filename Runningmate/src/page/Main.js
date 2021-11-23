@@ -32,7 +32,7 @@ const Main = (props) => {
                 <div id='up-nav-var'>
                     <div id='helloword'>
                         <div id="username">{nickname}</div>
-                       <br></br>
+                       
                        <div id='date'>{todayMonth + '-' + todayDate + '-' + day0fweek}</div>
                     </div>
                     <div>
@@ -47,7 +47,7 @@ const Main = (props) => {
                 <div id='bottom-nav-bar'>
                     <button id='nav-button' onClick={()=> {history.push('/main')}}><img src="img/home.png" alt='mypic' className='home_img'></img></button>
                     <button id='nav-button' onClick={()=> {history.push(`/${RoomPath}`)}}><img src="img/message.png" alt='mypic' className='home_img'></img></button>
-                    <button id='nav-button' onClick={()=> {history.push('/friend')}}><img src="img/contact.png" alt='mypic' className='home_img'></img></button>
+                    {/* <button id='nav-button' onClick={()=> {history.push('/friend')}}><img src="img/contact.png" alt='mypic' className='home_img'></img></button> */}
                     <button id='nav-button' onClick={()=> {history.push('/info')}}><img src="img/info.png" alt='mypic' className='home_img'></img></button>
                 </div>
 

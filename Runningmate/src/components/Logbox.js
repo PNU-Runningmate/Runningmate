@@ -8,7 +8,11 @@ function Logbox(props) {
         <Link to={{
             pathname:`/map`,
             state:{
-                location:location
+                location:location,
+                runningtime:runningtime,
+                date:date,
+                length:length,
+                pace:pace,
             }
             }}>
         <div style={{width:"80%",height:"100px",backgroundColor:"rgb(245, 245, 245)",borderRadius:"1rem",margin:"10px 0 10px 0",boxShadow:"10px 5px 5px grey"}}>

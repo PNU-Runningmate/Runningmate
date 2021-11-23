@@ -6,6 +6,7 @@ import Start from '../components/Start';
 import '../styles/Waitingpage.css';
 import { useHistory } from 'react-router';
 import axios from 'axios';
+import { MdArrowBackIos } from "react-icons/md";
 import { serverURL } from '../components/modules/ServerConst';
 
 
@@ -41,14 +42,14 @@ function Room() {
 
     return (
         <div>
-            <div className="nav">       
+            <div className="nav"> 
+                <button id='back' onClick={deleteRoomUrl}><MdArrowBackIos/></button>
                 <div className="km">{Length}</div>
                 <div>{RoomName}</div>
                 <div className="edit">
-                <img id="edit_img" src="img/edit2.jpg" alt="profile" />
+                {/* <img id="edit_img" src="img/edit2.jpg" alt="profile" /> */}
                 </div>
                 <Kakaosend url={window.location.search}/>
-                <button onClick={deleteRoomUrl}>나가기</button>
             </div>
             {start ? (<Start users={users} Stop={Stop} Length={Length}/>) :
              (<Chat users={users} allReady={allReady} messages={messages} sendMessage={sendMessage} sendReady={sendReady} sendStart={sendStart} socketRef={socketRef}/>)}

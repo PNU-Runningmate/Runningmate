@@ -25,8 +25,9 @@ const Infopage = ({ history }) => {
             {list.map((item,i)=>(
                 <Logbox key={i} date={item.createdAt} length={item.length} runningtime={item.runningtime} pace={item.pace} location={item.location} />
             ))}
+
         </div>
     )
-}
+    }
 
 export default Infopage;
