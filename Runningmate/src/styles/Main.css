@@ -5,6 +5,10 @@
     font-style: normal;
 }
 
+.background{
+    height: 100vh;
+    width: 100vw;
+}
 /* @font-face {
     font-family: 'TmoneyRoundWindRegular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindRegular.woff') format('woff');
