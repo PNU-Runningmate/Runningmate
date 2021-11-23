@@ -15,7 +15,6 @@ const Main = (props) => {
         const RoomPath = RoomState();
         const history = useHistory();
         const [nickname,setnickname] = useState('');
-        const [latest,setlatest] = useState({"length":0,"pace":0,"runningtime":0});
         const now= new Date();
         const todayMonth = now.getMonth() + 1;
         const todayDate = now.getDate()

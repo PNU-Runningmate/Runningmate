@@ -8,7 +8,7 @@ function Chat(props) {
     const DomReady = useRef();
     const [ready,setready] = useState(false);
     const [newMessage,setNewMessage] = useState("");
-    const { allReady,users,messages, sendMessage, sendReady, sendStart} = props
+    const { allReady,users,messages, sendMessage, sendReady, sendStart, socketRef} = props
     const usercount = users.length;
 
     const handleNewMessageChange = (e)=>{
@@ -32,6 +32,17 @@ function Chat(props) {
             DomReady.current.style.backgroundColor = 'blue';
         }
     }
+    const showstart = ()=>{
+        console.log('잉?')
+        console.log('안나오는데???')
+        if(allReady){
+            console.log(socketRef.current.id)
+            if(users[0].socket_id == socketRef.current.id){
+                return true
+            }
+        }
+        return false
+    }
     return (
         <div>
             <div className="par-bar">
@@ -45,14 +56,12 @@ function Chat(props) {
                     </div>
                     <div className="name">
                     {users.map((username,i)=>(
-                        <div key={i} className='myname'>{username.nickname},{username.status? 'Ready':'not ready'}</div>
+                        <div key={i} className='myname'>{username.nickname},{username.status? 'Ready':''}</div>
                     ))}
                     </div>
                     <div className="ready">
                     <button type="button" ref={DomReady} onClick={onClick}>{ready ? '취소':'준비'}</button>
-                    {allReady ? (
-                    <button onClick={sendStart} >시작</button>
-                    ):(<div/>)}
+                    {showstart() ? (<button onClick={sendStart}>시작</button>):(<div/>)}
                     </div>
                 </div>
             </div>

@@ -22,6 +22,7 @@ function SocketContext(roomId,length) {
             setallReady(false);
         }
     }
+
     useEffect(() => {
         socketRef.current = io.connect(`${serverURL}`,{
             query:{roomId},

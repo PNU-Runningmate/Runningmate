@@ -21,7 +21,7 @@ function Room() {
     const RoomName = new URLSearchParams(window.location.search).get('title');
     const Length = new URLSearchParams(window.location.search).get('length');
     const roomId = new URLSearchParams(window.location.search).get('room_id');
-    const { users,start,allReady,messages, sendMessage, sendReady, sendStart, Stop} = SocketContext(roomId,Length);
+    const { users,start,allReady,messages, sendMessage, sendReady, sendStart, Stop, socketRef} = SocketContext(roomId,Length);
 
     console.log('users',users)
 
@@ -42,7 +42,7 @@ function Room() {
     return (
         <div>
             <div className="nav">       
-                <div className="km">{Length}km</div>
+                <div className="km">{Length}</div>
                 <div>{RoomName}</div>
                 <div className="edit">
                 <img id="edit_img" src="img/edit2.jpg" alt="profile" />
@@ -51,7 +51,7 @@ function Room() {
                 <button onClick={deleteRoomUrl}>나가기</button>
             </div>
             {start ? (<Start users={users} Stop={Stop} Length={Length}/>) :
-             (<Chat users={users} allReady={allReady} messages={messages} sendMessage={sendMessage} sendReady={sendReady} sendStart={sendStart}/>)}
+             (<Chat users={users} allReady={allReady} messages={messages} sendMessage={sendMessage} sendReady={sendReady} sendStart={sendStart} socketRef={socketRef}/>)}
         </div>
     )
 }
