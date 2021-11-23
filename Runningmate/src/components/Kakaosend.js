@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { clientURL } from './modules/ServerConst'
 import '../styles/Waitingpage.css';
 
 function Kakaosend(props) {
@@ -11,16 +12,16 @@ function Kakaosend(props) {
               imageUrl:
                 'null',
               link: {
-                mobileWebUrl: `http://localhost:3000/room`,
-                webUrl: `http://localhost:3000/room?`,
+                mobileWebUrl: `${clientURL}/room`,
+                webUrl: `${clientURL}/room?`,
               },
             },
             buttons: [
               {
                 title: '바로가기',
                 link: {
-                  mobileWebUrl: `http://localhost:3000/room${props.url}`,
-                  webUrl: `http://localhost:3000/room${props.url}`,
+                  mobileWebUrl: `${clientURL}/room${props.url}`,
+                  webUrl: `${clientURL}/room${props.url}`,
                 },
               },
             ],

@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {Button,Card} from 'react-bootstrap'
 import axios from 'axios';
 import '../styles/CreateRoom.css';
+import { serverURL } from '../components/modules/ServerConst';
 import { MdArrowBackIos } from "react-icons/md";
 
 const RoomState = ()=>{
@@ -15,10 +16,13 @@ function CreateRoom(props) {
     const history = useHistory();
     const length = useRef();
     const title = useRef();
-    const onClickRoomNumber= () =>{
-        axios.get(`http://localhost:5000/test?title=${title.current.value}&length=${length.current.value}`).then((data)=>{
+      const onClickRoomNumber= () =>{
+        axios.get(`${serverURL}/test?title=${title.current.value}&length=${length.current.value}`).then((data)=>{
           localStorage.setItem('RoomUrl',data.data.redirect_url);
           history.push(`/room${data.data.redirect_url}`)
+        }).catch(e=>{
+          alert(e.response.data.message)
+          history.push('/');
         })
     }
     const myoption=[

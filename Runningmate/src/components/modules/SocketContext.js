@@ -1,5 +1,6 @@
 import io from 'socket.io-client'
 import React,{useRef,useState,useEffect} from 'react'
+import { serverURL } from './ServerConst';
 var id;
 
 function SocketContext(roomId,length) {
@@ -22,7 +23,7 @@ function SocketContext(roomId,length) {
         }
     }
     useEffect(() => {
-        socketRef.current = io.connect("http://localhost:5000",{
+        socketRef.current = io.connect(`${serverURL}`,{
             query:{roomId},
             withCredentials:true
         });

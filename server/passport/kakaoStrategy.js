@@ -1,11 +1,12 @@
 const passport = require('passport');
 const kakaoStrategy = require('passport-kakao').Strategy;
 const user = require('../Models/User');
+const {serverURL} = require('../modules/serverConst')
 
 module.exports = ()=>{
     passport.use(new kakaoStrategy({
         clientID: process.env.REST_API,
-        callbackURL: 'http://localhost:5000/oauth',
+        callbackURL: `${serverURL}/oauth`,
     },async(accessToken,refreshToken,profile,done)=>{
         console.log('kakaoprofile',profile)
         try{

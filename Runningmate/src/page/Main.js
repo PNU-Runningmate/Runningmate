@@ -2,6 +2,10 @@ import React, {useEffect,useRef, useState} from 'react';
 import '../styles/Main.css';
 import axios from 'axios'
 import {useHistory}  from 'react-router';
+import LatestRecord from '../components/LatestRecord';
+import Rank from '../components/Rank';
+import { serverURL } from '../components/modules/ServerConst';
+
 axios.defaults.withCredentials = true;
 const RoomState = ()=>{
     const path = localStorage.getItem("RoomUrl");
@@ -10,14 +14,18 @@ const RoomState = ()=>{
 const Main = (props) => {
         const RoomPath = RoomState();
         const history = useHistory();
-        const [nickname,setnickname] = useState('로그인이 필요합니다');
+        const [nickname,setnickname] = useState('');
+        const [latest,setlatest] = useState({"length":0,"pace":0,"runningtime":0});
         const now= new Date();
         const todayMonth = now.getMonth() + 1;
         const todayDate = now.getDate()
         const week = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         const day0fweek = week[now.getDay()];
+
         useEffect(()=>{
-            axios.get("http://localhost:5000/main").then(data=>setnickname(`안녕하세요 ${data.data}님`));
+            axios.get(`${serverURL}/main`).then(data=>{
+                setnickname(`안녕하세요 ${data.data.nickname}님`)
+        }).catch(e=>setnickname(e.response.data.error))
         },[])
 
             return(
@@ -32,71 +40,10 @@ const Main = (props) => {
                     <img src="img/profile.JPG" alt='mypic' className="image1"></img>
                     </div>
                 </div>
+                <LatestRecord/>
+                <Rank/>
+                
 
-                <div id='privious'>
-                    <div id='record'>
-                        <button type='button' className='button'>◀</button>
-                        <div>&nbsp;&nbsp;나의 최근 기록&nbsp;&nbsp;</div>
-                        <button type='button' className='button'>▶</button>
-                    </div>
-                    <div id='elements'>
-                        <div id='elements_1'>
-                            <div>거리</div>
-                            <div id='num'>5km</div>
-                        </div>
-                        <div id='elements_2'>
-                            <div>시간</div>
-                            <div id='num'>1시간</div>
-                        </div>
-                        <div id='elements_3'>
-                            <div>페이스</div>
-                            <div id='num'>5km/h</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id='postbody'>
-                    <div id='rank'>
-                        <select className='select_box'>
-                            <option>1km</option>
-                            <option>3km</option>
-                            <option>5km</option>
-                            <option>10km</option>
-                        </select>
-                        <label className='ranking'>&nbsp;구간 순위</label>
-
-                        <div id='rank_elements1'>
-                            <div>순위</div>
-                            <div>이름</div>
-                            <div>기록</div>
-                        </div>
-                        <div id='rank_elements'>
-                            <div id='number'>&nbsp;1</div>
-                            <div>&nbsp;&nbsp;&nbsp;김ㅇㅇ</div>
-                            <div>0h 40m</div>
-                        </div>
-                        <div id='rank_elements'>
-                            <div id='number'>&nbsp;2</div>
-                            <div>&nbsp;&nbsp;&nbsp;박ㅇㅇ</div>
-                            <div>0h 40m</div>
-                        </div>
-                        <div id='rank_elements'>
-                            <div id='number'>&nbsp;3</div>
-                            <div>&nbsp;&nbsp;&nbsp;이ㅇㅇ</div>
-                            <div>0h 40m</div>
-                        </div>
-                        <div id='rank_elements'>
-                            <div id='number4'>&nbsp;4</div>
-                            <div>&nbsp;&nbsp;&nbsp;최ㅇㅇ</div>
-                            <div>0h 40m</div>
-                        </div>
-                        <div id='rank_elements'>
-                            <div id='number4'>&nbsp;5</div>
-                            <div>&nbsp;&nbsp;&nbsp;이ㅇㅇ</div>
-                            <div>0h 40m</div>
-                        </div>
-                    </div>
-                </div>
 
                 <div id='bottom-nav-bar'>
                     <button id='nav-button' onClick={()=> {history.push('/main')}}><img src="img/home.png" alt='mypic' className='home_img'></img></button>

@@ -22,8 +22,8 @@ function Map(props) {
         let container = document.getElementById("map");
     
         let options = {
-          center: new kakao.maps.LatLng(35.229197, 129.089272),
-          level: 8,
+          center: new kakao.maps.LatLng(location[0].latitude, location[0].longitude),
+          level: 2,
         };
     
         let map = new kakao.maps.Map(container, options);

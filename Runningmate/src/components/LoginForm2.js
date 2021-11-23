@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
+import { serverURL } from "./modules/ServerConst";
 // import KakaoLogin from "./KakaoLogin";
 // import LoginImage from "../LoginImage"; 
 import axios from 'axios';
@@ -39,17 +40,14 @@ const LoginForm2 = ({ classes }) => {
     if( email === "" || password === ""){
       alert('아이디와 비밀번호를 입력해주세요');
     }else{
-    axios.post('http://localhost:5000/api/auth/login',{
+    axios.post(`${serverURL}/api/auth/login`,{
           email: email,
           password: password,
       }).then((data)=>{
         if(data.status === 200){
           alert('로그인 성공!')
           history.push('/main')
-          // History.push("/waiting")
         }
-          //redirect 시켜주기.?
-          //아니면 다른 응답코드 400 500 받앗을때 처리해주기
       })
       .catch(err=>{
         console.log(err);
@@ -59,7 +57,7 @@ const LoginForm2 = ({ classes }) => {
   };
   const handleLogin2 = (e) => {
     e.preventDefault();
-    axios.get("http://localhost:5000/api/auth/logout").then((data)=>{console.log(data)})
+    axios.get(`${serverURL}/api/auth/logout`).then((data)=>{console.log(data)})
     .catch((err)=>{
       console.log(err)
     })
@@ -158,7 +156,7 @@ const LoginForm2 = ({ classes }) => {
               </Button>
               
             </Link>
-            <a href="http://localhost:5000/api/auth/kakao" >
+            <a href='http://localhost:5000/api/auth/kakao' >
               <img src='img/login2.png' alt='loginimg' style={{marginTop:'10px', width:'100%'}} /></a>
             <Button onClick={handleLogin2}>로그아웃</Button>
           </div>
