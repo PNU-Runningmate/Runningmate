@@ -2,15 +2,19 @@ import React,{useEffect,useState,useRef} from 'react'
 import {useHistory} from 'react-router-dom';
 import {Button,Card} from 'react-bootstrap'
 import axios from 'axios';
+import { serverURL } from '../components/modules/ServerConst';
 
 function CreateRoom(props) {
     const history = useHistory();
     const length = useRef();
     const title = useRef();
       const onClickRoomNumber= () =>{
-        axios.get(`http://localhost:5000/test?title=${title.current.value}&length=${length.current.value}`).then((data)=>{
+        axios.get(`${serverURL}/test?title=${title.current.value}&length=${length.current.value}`).then((data)=>{
           localStorage.setItem('RoomUrl',data.data.redirect_url);
           history.push(`/room${data.data.redirect_url}`)
+        }).catch(e=>{
+          alert(e.response.data.message)
+          history.push('/');
         })
       }
   

@@ -1,14 +1,18 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Spinner from 'react-bootstrap/esm/Spinner'
 
 function Start(props) {
     const {Stop,users,Length } = props
-    console.log(users[0].distance)
+    const [loading,setloading] = useState(true);
+    useEffect(() => {
+        setTimeout(()=>{setloading(false)},2000);
+    }, [])
+
     return (
         <div>
-            {users[0].distance == undefined 
-            ? <Spinner animation="border" variant="info" size="L"/>
+            {loading
+            ? <Spinner animation="border" variant="info"/>
             :users.map((user,i)=>(
                 <div key={i}>
                     <div>{user.nickname}</div>

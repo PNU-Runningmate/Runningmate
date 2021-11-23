@@ -15,10 +15,12 @@ const cors = require('cors');
 const {isLoggedin} = require('./middlewares/login');
 const {computeDistance} = require('./modules/distance');
 const Record = require('./Models/Record');
+const {clientURL} = require('./modules/serverConst')
+const {serverURL} = require('./modules/serverConst')
 
 
 
-app.use(cors({origin:'http://localhost:3000',credentials:true}));
+app.use(cors({origin:`${clientURL}`,credentials:true}));
 dotenv.config();
 app.use(morgan('dev'));
 app.use(helmet());
@@ -50,27 +52,51 @@ app.use('/api/auth',AuthRouter);
 app.get('/oauth',passport.authenticate('kakao',{
     failureRedirect:'/',
 }),(req,res)=>{
-    res.redirect("http://localhost:3000/main")
+    res.redirect(`${clientURL}/main`)
 })
 
 
 app.get('/main',(req,res)=>{
-    res.json(req.user.nickname);
+        try{
+            res.json({"nickname":req.user.nickname})
+        }catch(e){
+            res.status(400).json({'error':'로그인이 필요합니다.'})
+        }
+})
+//유저 최근 기록
+app.get('/latest',async (req,res)=>{
+    try{
+        const record = await Record.find({author:req.user});
+        res.json({"latest_record":record[record.length-1]})
+    }catch(e){
+        console.log(e)
+    }
+})
+//랭크
+app.get('/rank',async(req,res)=>{
+    const {ranklength} = req.query;
+    try{
+        const record = await Record.find({roomlength:ranklength,length:{$gte:ranklength.slice(0,ranklength.length-2)}}).sort({runningtime:1})
+        console.log(record)
+    }catch(e){
+        console.log(e)
+    }
 })
 
 app.get('/room',isLoggedin,(req,res)=>{
     res.json({status_code:200})
 });
 
-app.get('/test',(req,res)=>{
+//방url 생성
+app.get('/test',isLoggedin,(req,res)=>{
     const {length,title} = req.query;
     const randomnumber = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     res.json({
         "redirect_url":`?room_id=${randomnumber}&title=${title}&length=${length}`,
     })
 })
-
-app.get("/date",async (req,res)=>{
+//인포페이지 날짜별 기록 정보 
+app.get("/date",isLoggedin,async (req,res)=>{
     const {rday} = req.query;
     const start = new Date(rday);
     const setend = new Date(rday);
@@ -96,7 +122,7 @@ mongoose.connect(process.env.MONGO_URL,(err)=>{
 })
 
 //socket.io import
-const options = {cors:{origin:"http://localhost:3000",methods: ["GET","POST"],credentials:true},pingTimeout: 10000};
+const options = {cors:{origin:`${clientURL}`,methods: ["GET","POST"],credentials:true},pingTimeout: 10000};
 const io =require("socket.io")(httpServer,options);
 //compatibility with express middleware
 const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
@@ -207,8 +233,9 @@ io.on("connection",(socket)=>{
                 author: socket.request.user.id,
                 location: location,
                 runningtime: time.toFixed(2),
-                length: socket.distance,
-                pace: time/socket.distance
+                length: socket.distance.toFixed(4),
+                pace: time/socket.distance.toFixed(2),
+                roomlength:socket.Goal
             })
     })
     //소켓 연결 해제 listen

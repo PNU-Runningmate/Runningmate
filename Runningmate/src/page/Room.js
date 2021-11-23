@@ -6,6 +6,7 @@ import Start from '../components/Start';
 import '../styles/Waitingpage.css';
 import { useHistory } from 'react-router';
 import axios from 'axios';
+import { serverURL } from '../components/modules/ServerConst';
 
 
 function SetRoomUrl(){
@@ -31,7 +32,7 @@ function Room() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/room`)
+        axios.get(`${serverURL}/room`)
          .catch(e =>{
              alert(e.response.data.message)
              history.push('/')
