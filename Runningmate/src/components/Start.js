@@ -22,8 +22,8 @@ function Start(props) {
             :users.map((user,i)=>(
                 <div key={i}>
                     <div id='info3'>
-                    <div id='nickname'>{user.nickname} - </div>
-                    <div id='percent'>&nbsp;{Math.round((users[i].distance/Length)*100)}%</div>
+                        <div id='nickname'>{user.nickname} - </div>
+                        <div id='percent'>&nbsp;{Math.round((users[i].distance/Length)*100)}%</div>
                     </div>
 
                     <div id='bar'>

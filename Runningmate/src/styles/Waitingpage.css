@@ -19,14 +19,11 @@
     align-items: center;
     justify-content: space-evenly;
     text-align: center;
-    display: flex;
 }
 
 .back_button{
     background-color: #67BDEC;
     border: none;
-    margin-right: 5px;
-    
 }
 
 .km{
@@ -155,6 +152,7 @@
     border-radius: 5px;
     border: 1px solid darkgrey;
     height: 30px;
+    width: 100%;
     margin-right: 1px;
 }
 
