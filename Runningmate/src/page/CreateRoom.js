@@ -17,13 +17,17 @@ function CreateRoom(props) {
     const length = useRef();
     const title = useRef();
       const onClickRoomNumber= () =>{
-        axios.get(`${serverURL}/test?title=${title.current.value}&length=${length.current.value}`).then((data)=>{
-          localStorage.setItem('RoomUrl',data.data.redirect_url);
-          history.push(`/room${data.data.redirect_url}`)
-        }).catch(e=>{
-          alert(e.response.data.message)
-          history.push('/');
+        if(length.current.value === "select"){
+          alert('거리를 선택해주세요')
+        }else{
+          axios.get(`${serverURL}/test?title=${title.current.value}&length=${length.current.value}`).then((data)=>{
+            localStorage.setItem('RoomUrl',data.data.redirect_url);
+            history.push(`/room${data.data.redirect_url}`)
+          }).catch(e=>{
+            alert(e.response.data.message)
+            history.push('/');
         })
+      }
     }
     const myoption=[
       {key:1,name:"1km"},

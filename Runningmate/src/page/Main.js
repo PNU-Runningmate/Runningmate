@@ -37,7 +37,7 @@ const Main = (props) => {
         },[])
 
             return(
-                <div>
+                <div className='background'>
                 <div id='up-nav-var'>
                     <div id='helloword'>
                         <div id="username">{nickname}</div>
