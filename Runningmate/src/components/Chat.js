@@ -1,10 +1,7 @@
 import React,{useState,useRef} from 'react'
-import SocketContext from '../components/modules/SocketContext';
 import '../styles/Waitingpage.css';
-import Kakaosend from '../components/Kakaosend';
 
 function Chat(props) {
-    const roomId = new URLSearchParams(window.location.search).get('room_id');
     const DomReady = useRef();
     const [ready,setready] = useState(false);
     const [newMessage,setNewMessage] = useState("");
@@ -15,7 +12,7 @@ function Chat(props) {
         setNewMessage(e.target.value);
     }
     const Enter = (e)=>{
-        if(e.key == "Enter"){
+        if(e.key === "Enter"){
             handleSendMessage();
         }
     }
@@ -36,7 +33,7 @@ function Chat(props) {
         if(allReady){
             console.log(socketRef.current.id)
             console.log(users[0].socket_id)
-            if(users[0].socket_id == socketRef.current.id){
+            if(users[0].socket_id === socketRef.current.id){
                 return true
             }
         }

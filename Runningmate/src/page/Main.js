@@ -25,12 +25,12 @@ const Main = (props) => {
   const handleLogin2 = (e) => {
     e.preventDefault();
     axios
-      .get("http://localhost:5000/api/auth/logout")
+      .get(`${serverURL}/api/auth/logout`)
       .then((data) => {
         console.log(data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
       });
     history.push("/");
   };
@@ -42,7 +42,7 @@ const Main = (props) => {
         setnickname(`안녕하세요 ${data.data.nickname}님`);
       })
       .catch((e) => setnickname(e.response.data.error));
-  }, []);
+  }, []);   
 
   return (
     <div className="background">

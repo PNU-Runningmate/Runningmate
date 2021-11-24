@@ -1,4 +1,4 @@
-import React,{useRef,useState,useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import { serverURL } from './modules/ServerConst';
 import RankItem from './RankItem';

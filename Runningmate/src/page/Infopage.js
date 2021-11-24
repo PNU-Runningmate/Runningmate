@@ -1,8 +1,6 @@
-import React, {useState,useEffect,useRef} from 'react';
-import Map from '../components/Map';
+import React, {useState,useRef} from 'react';
 import Logbox from '../components/Logbox';
 import axios from 'axios';
-import { timeout } from '../../node_modules/workbox-core/_private';
 import '../styles/Infopage.css'
 import {AiOutlineSearch} from "react-icons/ai";
 import { serverURL } from '../components/modules/ServerConst';

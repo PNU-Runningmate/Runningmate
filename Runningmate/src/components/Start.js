@@ -37,7 +37,7 @@ function Start(props) {
             }
 
             <div id='fin'>
-                {visible? <button id='finish_btn' onClick={Stop, stop2}>종료</button> : null}
+                {visible? <button id='finish_btn' onClick={stop2}>종료</button> : null}
             </div>
             
         </div>

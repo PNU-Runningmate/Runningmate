@@ -1,5 +1,4 @@
-import React,{useEffect,useState} from 'react'
-import axios from 'axios'
+import React,{useEffect} from 'react'
 import '../styles/Map.css';
 import { MdArrowBackIos } from "react-icons/md";
 import {useHistory} from 'react-router-dom';
@@ -13,7 +12,6 @@ function Map(props) {
     const RoomPath = RoomState();
     const history = useHistory();
     // const dateControl = useRef();
-    const [list,setlist] = useState([]);
     const {kakao} = window;
     const {location,pace,length,runningtime,date} = props.location.state
     const setdate = date.toString().split("T")
@@ -28,7 +26,7 @@ function Map(props) {
         let map = new kakao.maps.Map(container, options);
         var linePath = [];
         location.map(item=>{
-            linePath.push(new kakao.maps.LatLng(item.latitude,item.longitude))
+            return linePath.push(new kakao.maps.LatLng(item.latitude,item.longitude))
         })
         var polyline = new kakao.maps.Polyline({
             path: linePath, // 선을 구성하는 좌표배열 입니다
