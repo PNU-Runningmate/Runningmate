@@ -1,8 +1,8 @@
 # :facepunch:  Runningmate
-https://runningmate.netlify.app
-<img width="679" alt="스크린샷 2021-12-06 오후 2 27 39" src="https://user-images.githubusercontent.com/64008899/144792257-74f0b9e9-522f-4dc8-96ee-3cb183691140.png"><br>
 
-## Description
+<img width="679" alt="스크린샷 2021-12-06 오후 2 27 39" src="https://user-images.githubusercontent.com/64008899/144792257-74f0b9e9-522f-4dc8-96ee-3cb183691140.png"><br>
+<h3>:link:Go service:https://runningmate.netlify.app</h3>
+<h2> Description</h2>
  <h3>:runner: Invite your friend and run together</h3>
  <br>
  <h2>Dev Stack</h2>
